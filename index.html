@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDFMelt - Compress, Split & Merge PDFs Locally</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-blue: #0154f0;
+            --brand-dark: #121826; 
+            --text-gray: #64748b;  
+            --bg-white: #ffffff;
+            --border-light: #f1f5f9;
+            --bg-light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* Nav & Header */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin: 0;
+            color: var(--brand-dark);
+            line-height: 1;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--brand-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--brand-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 0 60px 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--brand-dark);
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-dark);
+            color: var(--bg-white);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(18, 24, 38, 0.15);
+            box-sizing: border-box;
+        }
+
+        .download-btn:hover {
+            background-color: var(--brand-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(1, 84, 240, 0.25);
+        }
+
+        .download-btn svg {
+            margin-right: 12px;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin: 0 0 10px 0;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Privacy Banner */
+        .privacy-banner {
+            background-color: var(--bg-light);
+            border-left: 5px solid var(--brand-blue);
+            padding: 40px 30px;
+            border-radius: 0 16px 16px 0;
+            margin: 60px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+
+        .privacy-banner h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--brand-dark);
+            margin: 0 0 10px 0;
+        }
+
+        .privacy-banner p {
+            margin: 0;
+            color: var(--text-gray);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        footer a {
+            color: var(--brand-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ==========================================
+           Media Query para Teléfonos Pequeños (<= 480px)
+           2 Columnas por fila y elementos reducidos
+           ========================================== */
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px 10px;
+            }
+
+            /* Adaptación del Menú */
+            nav {
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 20px;
+                padding: 10px 0 15px 0;
+            }
+
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            /* Adaptación del Hero */
+            .hero {
+                padding: 15px 0 25px 0;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+                letter-spacing: -0.5px;
+                margin-bottom: 10px;
+            }
+
+            .hero p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+                margin-bottom: 20px;
+            }
+
+            .download-btn {
+                width: 100%;
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
+
+            .download-btn svg {
+                width: 18px;
+                height: 18px;
+                margin-right: 8px;
+            }
+
+            /* 2 Columnas para Teléfonos Pequeños */
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                margin-top: 20px;
+            }
+
+            .feature-card {
+                padding: 12px 10px;
+                border-radius: 10px;
+            }
+
+            .feature-icon {
+                font-size: 1.5rem;
+                margin-bottom: 6px;
+            }
+
+            .feature-card h3 {
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+                line-height: 1.2;
+            }
+
+            .feature-card p {
+                font-size: 0.75rem;
+                line-height: 1.35;
+            }
+
+            /* Adaptación del Banner de Privacidad */
+            .privacy-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 14px 12px;
+                margin: 25px 0;
+                gap: 8px;
+                border-left-width: 4px;
+                border-radius: 0 10px 10px 0;
+            }
+
+            .privacy-banner div:first-child {
+                font-size: 1.8rem !important;
+            }
+
+            .privacy-banner h2 {
+                font-size: 1rem;
+                margin-bottom: 4px;
+            }
+
+            .privacy-banner p {
+                font-size: 0.78rem;
+                line-height: 1.4;
+            }
+
+            /* Adaptación del Footer */
+            footer {
+                margin-top: 30px;
+                padding-top: 15px;
+                font-size: 0.75rem;
+            }
+
+            footer div {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            footer a {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Navigation -->
+        <nav>
+            <a href="#" class="logo">PDF<span>Melt</span></a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#privacy">Privacy</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Your Ultimate Local PDF Tool</h1>
+            <p>Compress, split, merge, and organize your PDF documents quickly, securely, and completely offline on your mobile device.</p>
+            
+            <a href="https://play.google.com/store/apps/details?id=com.tu.paquete" class="download-btn" target="_blank">
+                <!-- SVG Play Store Icon -->
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.9 2.1C18.6 1.9 18.2 1.9 17.8 2.1L3.9 9.8C3.3 10.1 3 10.7 3 11.4V12.6C3 13.3 3.3 13.9 3.9 14.2L17.8 21.9C18.2 22.1 18.6 22.1 18.9 21.9C19.3 21.7 19.5 21.3 19.5 20.9V3.1C19.5 2.7 19.3 2.3 18.9 2.1Z"/>
+                </svg>
+                Get it on Google Play
+            </a>
+        </div>
+
+        <!-- Features Grid -->
+        <div id="features" class="features">
+            
+            <div class="feature-card">
+                <div class="feature-icon">🗜️</div>
+                <h3>Smart Compression</h3>
+                <p>Reduce PDF file sizes effortlessly without losing document quality.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✂️</div>
+                <h3>Split & Extract</h3>
+                <p>Cut large documents into smaller files or extract specific pages.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>Merge Documents</h3>
+                <p>Combine multiple PDF files into a single, organized document.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Blazing Fast</h3>
+                <p>Optimized for mobile to process documents in seconds offline.</p>
+            </div>
+
+        </div>
+
+        <!-- Privacy Highlight -->
+        <div id="privacy" class="privacy-banner">
+            <div style="font-size: 3rem;">🛡️</div>
+            <div>
+                <h2>100% Local & Private</h2>
+                <p>Your documents are your business. PDFMelt operates completely offline. Your files are processed locally on your device's memory and are <strong>never</strong> uploaded to any cloud or external servers.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div>
+                <a href="mailto:support@pdfmelt.dev">Contact Support</a>
+                <a href="privacy.html">Privacy Policy</a>
+               
+            </div>
+            <br>
+            &copy; 2026 PDF<span>Melt.</span> All rights reserved.
+        </footer>
+
+    </div>
+
+</body>
+</html>
