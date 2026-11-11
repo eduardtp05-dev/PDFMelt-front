@@ -6,6 +6,7 @@
     <title>PDFMelt - Compress, Split & Merge PDFs Locally</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -42,6 +43,8 @@
             padding: 20px 0;
             margin-bottom: 40px;
             border-bottom: 2px solid var(--border-light);
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -129,7 +132,7 @@
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 24px;
             margin-top: 40px;
         }
 
@@ -137,56 +140,135 @@
             background-color: var(--bg-light);
             border: 1px solid var(--border-light);
             border-radius: 16px;
-            padding: 30px;
+            padding: 24px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-sizing: border-box;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Cabecera horizontal de la tarjeta (Icono + Título) */
+        .feature-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
         }
 
         .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .feature-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .feature-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: var(--brand-dark);
-            margin: 0 0 10px 0;
+            margin: 0;
+            line-height: 1.25;
         }
 
         .feature-card p {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             margin: 0;
+            color: var(--text-gray);
+        }
+
+        /* Paleta de Colores por Icono */
+        /* Compress: Azul */
+        .icon-blue {
+            background-color: rgba(1, 84, 240, 0.1);
+        }
+        .icon-blue svg {
+            stroke: #0154f0;
+        }
+
+        /* Split: Púrpura / Índigo */
+        .icon-purple {
+            background-color: rgba(237, 58, 58, 0.1);
+        }
+        .icon-purple svg {
+            stroke: #ed3a3a;
+        }
+
+        /* Merge: Esmeralda / Verde */
+        .icon-green {
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+        .icon-green svg {
+            stroke: #10b981;
+        }
+
+        /* Fast: Ámbar / Naranja */
+        .icon-amber {
+            background-color: rgba(245, 158, 11, 0.12);
+        }
+        .icon-amber svg {
+            stroke: #f59e0b;
         }
 
         /* Privacy Banner */
         .privacy-banner {
             background-color: var(--bg-light);
             border-left: 5px solid var(--brand-blue);
-            padding: 40px 30px;
+            padding: 32px 28px;
             border-radius: 0 16px 16px 0;
-            margin: 60px 0;
+            margin: 50px 0;
             display: flex;
             align-items: center;
             gap: 20px;
             box-sizing: border-box;
         }
 
+        .privacy-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            background-color: rgba(1, 84, 240, 0.1);
+            border-radius: 14px;
+            flex-shrink: 0;
+        }
+
+        .privacy-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--brand-blue);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         .privacy-banner h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--brand-dark);
-            margin: 0 0 10px 0;
+            margin: 0 0 6px 0;
         }
 
         .privacy-banner p {
             margin: 0;
             color: var(--text-gray);
+            font-size: 0.95rem;
         }
 
         /* Footer */
@@ -211,15 +293,13 @@
         }
 
         /* ==========================================
-           Media Query para Teléfonos Pequeños (<= 480px)
-           2 Columnas por fila y elementos reducidos
-           ========================================== */
+            Media Query para Teléfonos Pequeños (<= 480px)
+            ========================================== */
         @media (max-width: 480px) {
             .container {
                 padding: 12px 10px;
             }
 
-            /* Adaptación del Menú */
             nav {
                 flex-direction: column;
                 gap: 10px;
@@ -241,7 +321,6 @@
                 font-size: 0.8rem;
             }
 
-            /* Adaptación del Hero */
             .hero {
                 padding: 15px 0 25px 0;
             }
@@ -270,47 +349,65 @@
                 margin-right: 8px;
             }
 
-            /* 2 Columnas para Teléfonos Pequeños */
+            /* Grid Móvil en 2 Columnas */
             .features {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
+                gap: 10px;
                 margin-top: 20px;
             }
 
             .feature-card {
-                padding: 12px 10px;
-                border-radius: 10px;
+                padding: 14px 12px;
+                border-radius: 12px;
+            }
+
+            .feature-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                margin-bottom: 8px;
             }
 
             .feature-icon {
-                font-size: 1.5rem;
-                margin-bottom: 6px;
+                width: 34px;
+                height: 34px;
+                border-radius: 8px;
+            }
+
+            .feature-icon svg {
+                width: 18px;
+                height: 18px;
             }
 
             .feature-card h3 {
-                font-size: 0.9rem;
-                margin-bottom: 6px;
+                font-size: 0.88rem;
                 line-height: 1.2;
             }
 
             .feature-card p {
-                font-size: 0.75rem;
+                font-size: 0.74rem;
                 line-height: 1.35;
             }
 
-            /* Adaptación del Banner de Privacidad */
             .privacy-banner {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 14px 12px;
+                padding: 16px 14px;
                 margin: 25px 0;
-                gap: 8px;
+                gap: 10px;
                 border-left-width: 4px;
                 border-radius: 0 10px 10px 0;
             }
 
-            .privacy-banner div:first-child {
-                font-size: 1.8rem !important;
+            .privacy-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+            }
+
+            .privacy-icon svg {
+                width: 20px;
+                height: 20px;
             }
 
             .privacy-banner h2 {
@@ -323,7 +420,6 @@
                 line-height: 1.4;
             }
 
-            /* Adaptación del Footer */
             footer {
                 margin-top: 30px;
                 padding-top: 15px;
@@ -349,7 +445,7 @@
         
         <!-- Navigation -->
         <nav>
-            <a href="#" class="logo">PDF<span>Melt</span></a>
+            <a translate="no" class="logo" href="#">PDF<span>Melt</span></a>
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#privacy">Privacy</a>
@@ -374,27 +470,63 @@
         <!-- Features Grid -->
         <div id="features" class="features">
             
+            <!-- Smart Compression (Azul) -->
             <div class="feature-card">
-                <div class="feature-icon">🗜️</div>
-                <h3>Smart Compression</h3>
+                <div class="feature-header">
+                    <div class="feature-icon icon-blue">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 14h6v6"></path>
+                            <path d="M20 10h-6V4"></path>
+                            <path d="M14 10l7-7"></path>
+                            <path d="M3 21l7-7"></path>
+                        </svg>
+                    </div>
+                    <h3>Smart Compression</h3>
+                </div>
                 <p>Reduce PDF file sizes effortlessly without losing document quality.</p>
             </div>
 
+            <!-- Split & Extract (Púrpura) -->
             <div class="feature-card">
-                <div class="feature-icon">✂️</div>
-                <h3>Split & Extract</h3>
+                <div class="feature-header">
+                    <div class="feature-icon icon-purple">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="6" cy="6" r="3"></circle>
+                            <circle cx="6" cy="18" r="3"></circle>
+                            <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                            <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                            <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3>Split & Extract</h3>
+                </div>
                 <p>Cut large documents into smaller files or extract specific pages.</p>
             </div>
 
+            <!-- Merge Documents (Verde Esmeralda) -->
             <div class="feature-card">
-                <div class="feature-icon">🔗</div>
-                <h3>Merge Documents</h3>
+                <div class="feature-header">
+                    <div class="feature-icon icon-green">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </div>
+                    <h3>Merge Documents</h3>
+                </div>
                 <p>Combine multiple PDF files into a single, organized document.</p>
             </div>
 
+            <!-- Blazing Fast (Ámbar / Naranja) -->
             <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Blazing Fast</h3>
+                <div class="feature-header">
+                    <div class="feature-icon icon-amber">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </div>
+                    <h3>Blazing Fast</h3>
+                </div>
                 <p>Optimized for mobile to process documents in seconds offline.</p>
             </div>
 
@@ -402,7 +534,11 @@
 
         <!-- Privacy Highlight -->
         <div id="privacy" class="privacy-banner">
-            <div style="font-size: 3rem;">🛡️</div>
+            <div class="privacy-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+            </div>
             <div>
                 <h2>100% Local & Private</h2>
                 <p>Your documents are your business. PDFMelt operates completely offline. Your files are processed locally on your device's memory and are <strong>never</strong> uploaded to any cloud or external servers.</p>
@@ -413,30 +549,14 @@
         <footer>
             <div>
                 <a href="mailto:support@pdfmelt.dev">Contact Support</a>
+                
                 <a href="privacy.html">Privacy Policy</a>
-               
             </div>
             <br>
-            &copy; 2026 PDF<span>Melt.</span> All rights reserved.
+            © 2026 PDF<span>Melt.</span> All rights reserved.
         </footer>
 
     </div>
 
 </body>
-
-
-    <div id="google_translate_element"></div>
-
-    <script type="text/javascript">
-    function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'en', 
-        includedLanguages: 'es,fr,pt,it,de,ja', 
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-    }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-
 </html>
