@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Apps — pdfmelt.dev</title>
+  <meta name="description" content="Utilidades móviles rápidas y privadas para Android. PdfMelt y CambioExpress VZ." />
+  <meta name="theme-color" content="#f8fafc" id="meta-theme-color" />
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:title" content="Apps — pdfmelt.dev" />
+  <meta property="og:description" content="Utilidades móviles rápidas y privadas para Android." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pdfmelt.dev/apps" />
+
+  <!-- Detecta automáticamente el modo claro/oscuro del dispositivo antes de renderizar -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("pdfmelt_theme");
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+        var meta = document.getElementById("meta-theme-color");
+        if (meta) meta.setAttribute("content", theme === "dark" ? "#0b0f17" : "#f8fafc");
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fuente Montserrat + JetBrains Mono para etiquetas técnicas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       VARIABLES DE TEMA — ESTILO FLAT (Claro / Oscuro)
+       ========================================================= */
+    :root {
+      --bg-canvas: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --bg-chip: #f8fafc;
+      --dot-color: #cbd5e1;
+
+      --ink-primary: #0f172a;
+      --ink-secondary: #475569;
+      --ink-muted: #64748b;
+
+      --line-subtle: #e2e8f0;
+      --line-strong: #cbd5e1;
+
+      /* PdfMelt — Azul #0154F0 (Flat) */
+      --blue-brand: #0154F0;
+      --blue-text: #0154F0;
+      --blue-surface: #eff6ff;
+      --blue-line: #bfdbfe;
+
+      /* CambioExpress VZ — Amarillo #FACB01 (Flat) */
+      --yellow-brand: #FACB01;
+      --yellow-text: #9a6700;
+      --yellow-surface: #fef9c3;
+      --yellow-line: #fde047;
+
+      /* Botón Google Play (Siempre oscuro) */
+      --cta-bg: #0f172a;
+      --cta-bg-hover: #1e293b;
+      --cta-border: #0f172a;
+      --cta-border-hover: #1e293b;
+      --cta-ink: #ffffff;
+      --cta-kicker: #94a3b8;
+      --cta-arrow-bg: rgba(255, 255, 255, 0.09);
+      --cta-arrow-ink: #cbd5e1;
+
+      /* Aviso Instagram */
+      --ig-bg: #fffbeb;
+      --ig-border: #fde68a;
+      --ig-ink: #78350f;
+      --ig-strong: #451a03;
+      --ig-icon-bg: #fef3c7;
+      --ig-icon-ink: #b45309;
+
+      /* Tip inferior */
+      --tip-bg: #ffffff;
+
+      --shadow-flat: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    html[data-theme="dark"] {
+      --bg-canvas: #0b0f17;
+      --bg-surface: #131924;
+      --bg-subtle: #1e2636;
+      --bg-chip: #18202e;
+      --dot-color: #1e293b;
+
+      --ink-primary: #f8fafc;
+      --ink-secondary: #94a3b8;
+      --ink-muted: #64748b;
+
+      --line-subtle: #232c3d;
+      --line-strong: #334155;
+
+      /* PdfMelt en oscuro */
+      --blue-brand: #0154F0;
+      --blue-text: #60a5fa;
+      --blue-surface: rgba(1, 84, 240, 0.14);
+      --blue-line: rgba(1, 84, 240, 0.42);
+
+      /* CambioExpress VZ en oscuro */
+      --yellow-brand: #FACB01;
+      --yellow-text: #FACB01;
+      --yellow-surface: rgba(250, 203, 1, 0.12);
+      --yellow-line: rgba(250, 203, 1, 0.36);
+
+      /* Botón Google Play oscuro también en modo oscuro */
+      --cta-bg: #070a11;
+      --cta-bg-hover: #0d121d;
+      --cta-border: #2a3447;
+      --cta-border-hover: #475569;
+      --cta-ink: #f8fafc;
+      --cta-kicker: #94a3b8;
+      --cta-arrow-bg: rgba(255, 255, 255, 0.07);
+      --cta-arrow-ink: #cbd5e1;
+
+      /* Aviso Instagram en oscuro */
+      --ig-bg: rgba(250, 203, 1, 0.08);
+      --ig-border: rgba(250, 203, 1, 0.28);
+      --ig-ink: #fde68a;
+      --ig-strong: #fef3c7;
+      --ig-icon-bg: rgba(250, 203, 1, 0.16);
+      --ig-icon-ink: #FACB01;
+
+      --tip-bg: #131924;
+
+      --shadow-flat: none;
+    }
+
+    /* Reglas para el barrido circular con View Transitions API */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+
+    ::view-transition-new(root) {
+      z-index: 9999;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--ink-primary);
+      background-color: var(--bg-canvas);
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    body {
+      min-height: 100dvh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding:
+        max(24px, env(safe-area-inset-top))
+        max(14px, env(safe-area-inset-right))
+        max(40px, env(safe-area-inset-bottom))
+        max(14px, env(safe-area-inset-left));
+      background-color: var(--bg-canvas);
+      background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+      background-size: 22px 22px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    @media (min-width: 420px) {
+      body {
+        padding:
+          max(28px, env(safe-area-inset-top))
+          max(18px, env(safe-area-inset-right))
+          max(48px, env(safe-area-inset-bottom))
+          max(18px, env(safe-area-inset-left));
+      }
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 460px;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    @media (min-width: 760px) {
+      body {
+        padding-top: 60px;
+      }
+      .shell {
+        max-width: 800px;
+        gap: 28px;
+      }
+    }
+
+    /* --- Cabecera + Toggle de Tema --- */
+    .masthead {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 0 2px;
+      min-width: 0;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .studio-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 11px 5px 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--line-subtle);
+      border-radius: 999px;
+      box-shadow: var(--shadow-flat);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+      max-width: calc(100% - 48px);
+    }
+
+    .studio-mark {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      background: var(--ink-primary);
+      color: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .studio-url {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink-secondary);
+      letter-spacing: -0.02em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--line-subtle);
+      color: var(--ink-secondary);
+      cursor: pointer;
+      box-shadow: var(--shadow-flat);
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--line-strong);
+      color: var(--ink-primary);
+    }
+
+    .theme-toggle:active {
+      transform: scale(0.95);
+    }
+
+    .icon-sun { display: none; }
+    .icon-moon { display: block; }
+
+    html[data-theme="dark"] .icon-sun { display: block; }
+    html[data-theme="dark"] .icon-moon { display: none; }
+
+    .masthead-copy h1 {
+      font-size: clamp(23px, 5vw, 29px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.18;
+      color: var(--ink-primary);
+      margin-bottom: 8px;
+    }
+
+    .masthead-copy p {
+      font-size: 14.5px;
+      color: var(--ink-secondary);
+      max-width: 54ch;
+      line-height: 1.6;
+    }
+
+    /* --- Aviso contextual para navegador interno de Instagram --- */
+    .ig-notice {
+      display: none;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 15px;
+      background: var(--ig-bg);
+      border: 1px solid var(--ig-border);
+      border-radius: 14px;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--ig-ink);
+      min-width: 0;
+    }
+
+    .ig-notice.is-active {
+      display: flex;
+    }
+
+    .ig-notice-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--ig-icon-bg);
+      color: var(--ig-icon-ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ig-notice strong {
+      font-weight: 600;
+      color: var(--ig-strong);
+    }
+
+    /* --- Bento Grid (minmax(0, 1fr) evita que una tarjeta ensanche el grid) --- */
+    .bento-grid {
+      width: 100%;
+      min-width: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    @media (min-width: 760px) {
+      .bento-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 20px;
+      }
+    }
+
+    /* --- Tarjeta Flat --- */
+    .product-card {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      background: var(--bg-surface);
+      border: 1px solid var(--line-subtle);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: var(--shadow-flat);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.25s ease;
+    }
+
+    @media (min-width: 420px) {
+      .product-card {
+        padding: 22px;
+        gap: 20px;
+      }
+    }
+
+    @media (hover: hover) {
+      .product-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--line-strong);
+      }
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px 10px;
+      min-width: 0;
+    }
+
+    .app-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .app-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 13px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    @media (min-width: 420px) {
+      .app-identity {
+        gap: 14px;
+      }
+      .app-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+      }
+    }
+
+    .app-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .app-icon--blue {
+      background: var(--blue-surface);
+      border: 1px solid var(--blue-line);
+      color: var(--blue-text);
+    }
+
+    .app-icon--yellow {
+      background: var(--yellow-surface);
+      border: 1px solid var(--yellow-line);
+      color: var(--yellow-text);
+    }
+
+    .app-titles {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .category-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .category-tag--blue { color: var(--blue-text); }
+    .category-tag--blue .category-dot { background-color: var(--blue-brand); }
+
+    .category-tag--yellow { color: var(--yellow-text); }
+    .category-tag--yellow .category-dot { background-color: var(--yellow-brand); }
+
+    .app-name {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--ink-primary);
+      line-height: 1.18;
+      overflow-wrap: break-word;
+    }
+
+    @media (min-width: 420px) {
+      .app-name {
+        font-size: 19.5px;
+      }
+    }
+
+    .platform-pill {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      background: var(--bg-chip);
+      border: 1px solid var(--line-subtle);
+      padding: 3px 7px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .app-summary {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+    }
+
+    /* Etiquetas vectoriales de especificaciones */
+    .spec-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .spec-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      max-width: 100%;
+      background: var(--bg-chip);
+      border: 1px solid var(--line-subtle);
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--ink-primary);
+      line-height: 1.3;
+    }
+
+    .spec-chip svg {
+      flex-shrink: 0;
+    }
+
+    .spec-chip--blue svg { color: var(--blue-text); }
+    .spec-chip--yellow svg { color: var(--yellow-text); }
+
+    .card-footer {
+      padding-top: 16px;
+      border-top: 1px solid var(--bg-subtle);
+    }
+
+    /* Botón de Google Play (Siempre oscuro en claro y oscuro) */
+    .play-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      padding: 11px 14px 11px 15px;
+      background-color: var(--cta-bg);
+      color: var(--cta-ink);
+      text-decoration: none;
+      border-radius: 12px;
+      border: 1px solid var(--cta-border);
+      transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .play-cta:hover {
+      background-color: var(--cta-bg-hover);
+      border-color: var(--cta-border-hover);
+    }
+
+    .play-cta:active {
+      transform: translateY(1px);
+    }
+
+    .play-cta-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .play-cta-left svg {
+      flex-shrink: 0;
+    }
+
+    .play-cta-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      min-width: 0;
+    }
+
+    .play-cta-kicker {
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--cta-kicker);
+    }
+
+    .play-cta-label {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--cta-ink);
+    }
+
+    .play-cta-arrow {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: var(--cta-arrow-bg);
+      color: var(--cta-arrow-ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.18s ease;
+    }
+
+    .play-cta:hover .play-cta-arrow {
+      transform: translate(1px, -1px);
+    }
+
+    /* --- Nota técnica discreta --- */
+    .browser-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--tip-bg);
+      border: 1px solid var(--line-subtle);
+      border-radius: 14px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.55;
+      box-shadow: var(--shadow-flat);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .browser-tip-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--ink-secondary);
+    }
+
+    .browser-tip strong {
+      color: var(--ink-primary);
+      font-weight: 600;
+    }
+
+    .colophon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 4px;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .colophon-mono {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="shell">
+
+    <!-- Cabecera editorial con barra superior y toggle de tema -->
+    <header class="masthead">
+      <div class="topbar">
+        <div class="studio-bar">
+          <span class="studio-mark" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="3"/>
+              <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+          </span>
+          <span class="studio-url">EduardDev</span>
+        </div>
+
+        <button
+          id="theme-toggle"
+          class="theme-toggle"
+          type="button"
+          aria-label="Cambiar entre modo claro y oscuro"
+          aria-pressed="false"
+          title="Cambiar tema"
+        >
+          <!-- Luna (visible en modo claro) -->
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <!-- Sol (visible en modo oscuro) -->
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="masthead-copy">
+        <h1>Utilidades móviles rápidas y privadas.</h1>
+        <p>Apps independientes para Android hechas para resolver tareas concretas sin registros, rastreadores ni procesos en la nube.</p>
+      </div>
+    </header>
+
+    <!-- Aviso dinámico para navegador interno de Instagram -->
+    <aside id="ig-notice" class="ig-notice" role="status">
+      <div class="ig-notice-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </div>
+      <div>
+        <strong>Abierto desde Instagram:</strong> Tocando cualquier botón intentaremos abrir Google Play Store directamente. Si el navegador de Instagram lo bloquea, pulsa el menú <strong>•••</strong> arriba a la derecha y selecciona <strong>Abrir en navegador externo</strong>.
+      </div>
+    </aside>
+
+    <!-- Bento Grid de Aplicaciones -->
+    <section class="bento-grid" aria-label="Catálogo de aplicaciones">
+
+      <!-- =========================================================
+           TARJETA 1: PDFMELT (#0154F0)
+           ========================================================= -->
+      <article class="product-card">
+        <div class="card-body">
+          <div class="card-head">
+            <div class="app-identity">
+              
+              <div class="app-icon app-icon--blue">
+                <img src="pdfmelt-logo-512.png" alt="PDFMelt">
+              </div>
+              <div class="app-titles">
+                <span class="category-tag category-tag--blue">
+                  <span class="category-dot" aria-hidden="true"></span>
+                  Productividad
+                </span>
+                <h2 class="app-name">PdfMelt</h2>
+              </div>
+            </div>
+            <span class="platform-pill">Android</span>
+          </div>
+
+          <p class="app-summary">
+            Comprime, une y divide tus PDFs en segundos. Todo ocurre dentro de tu dispositivo, sin subir documentos a la nube ni depender de internet.
+          </p>
+
+          <div class="spec-list">
+            <span class="spec-chip spec-chip--blue">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="1" y1="1" x2="23" y2="23"/>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+                <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                <line x1="12" y1="20" x2="12.01" y2="20"/>
+              </svg>
+              100% Offline
+            </span>
+            <span class="spec-chip spec-chip--blue">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              Privacidad local
+            </span>
+            <span class="spec-chip spec-chip--blue">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="4 14 10 14 10 20"/>
+                <polyline points="20 10 14 10 14 4"/>
+                <line x1="14" y1="10" x2="21" y2="3"/>
+                <line x1="3" y1="21" x2="10" y2="14"/>
+              </svg>
+              Compresión real
+            </span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+         
+          <a
+            href="https://play.google.com/store/apps/details?id=com.pdfmelt.app"
+            data-package="com.pdfmelt.app"
+            class="play-cta js-play-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Descargar PdfMelt en Google Play"
+          >
+            <span class="play-cta-left">
+              <svg width="21" height="23" viewBox="0 0 24 26" fill="none" aria-hidden="true">
+                <path d="M1.22 0.54C0.91 0.87 0.72 1.38 0.72 2.04V23.96C0.72 24.62 0.91 25.13 1.22 25.46L1.31 25.54L13.59 13.26V13V12.74L1.31 0.46L1.22 0.54Z" fill="#00D2FF"/>
+                <path d="M17.68 17.35L13.59 13.26V13V12.74L17.68 8.65L17.77 8.7L22.61 11.45C23.99 12.23 23.99 13.77 22.61 14.55L17.77 17.3L17.68 17.35Z" fill="#FFCE00"/>
+                <path d="M17.77 17.3L13.59 13L1.22 25.46C1.68 25.95 2.43 26.01 3.29 25.52L17.77 17.3Z" fill="#F14336"/>
+                <path d="M17.77 8.7L3.29 0.48C2.43 -0.01 1.68 0.05 1.22 0.54L13.59 13L17.77 8.7Z" fill="#00F076"/>
+              </svg>
+              <span class="play-cta-text">
+                <span class="play-cta-kicker">Disponible en</span>
+                <span class="play-cta-label">Google Play</span>
+              </span>
+            </span>
+
+            <span class="play-cta-arrow" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- =========================================================
+           TARJETA 2: CAMBIOEXPRESS VZ (#FACB01)
+           ========================================================= -->
+      <article class="product-card">
+        <div class="card-body">
+          <div class="card-head">
+            <div class="app-identity">
+            
+              <div class="app-icon app-icon--yellow">
+                <img src="icon-512-cambioexpress.png" alt="CambioExpressVZ">
+              </div>
+              <div class="app-titles">
+                <span class="category-tag category-tag--yellow">
+                  <span class="category-dot" aria-hidden="true"></span>
+                  Finanzas
+                </span>
+                <h2 class="app-name">CambioExpress VZ</h2>
+              </div>
+            </div>
+            <span class="platform-pill">Android</span>
+          </div>
+
+          <p class="app-summary">
+            Consulta el BCV, Euro y USDT al instante con calculadora integrada y sin publicidad molesta. Guarda las tasas en tu teléfono para revisarlas incluso sin señal o con conexiones lentas.
+          </p>
+
+          <div class="spec-list">
+            <span class="spec-chip spec-chip--yellow">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                <polyline points="16 7 22 7 22 13"/>
+              </svg>
+              BCV, Euro y USDT
+            </span>
+            <span class="spec-chip spec-chip--yellow">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="4" y="2" width="16" height="20" rx="2"/>
+                <line x1="8" y1="6" x2="16" y2="6"/>
+                <line x1="8" y1="10" x2="10" y2="10"/>
+                <line x1="14" y1="10" x2="16" y2="10"/>
+                <line x1="8" y1="14" x2="10" y2="14"/>
+                <line x1="14" y1="14" x2="16" y2="14"/>
+                <line x1="8" y1="18" x2="16" y2="18"/>
+              </svg>
+              Calculadora rápida
+            </span>
+            <span class="spec-chip spec-chip--yellow">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                <polyline points="17 21 17 13 7 13 7 21"/>
+                <polyline points="7 3 7 8 15 8"/>
+              </svg>
+              Guardado sin señal
+            </span>
+            <span class="spec-chip spec-chip--yellow">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+              </svg>
+              Sin publicidad molesta
+            </span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          
+          <a
+            href="https://play.google.com/store/apps/details?id=com.cambioexpressvz.app"
+            data-package="com.cambioexpressvz.app"
+            class="play-cta js-play-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Descargar CambioExpress VZ en Google Play"
+          >
+            <span class="play-cta-left">
+              <svg width="21" height="23" viewBox="0 0 24 26" fill="none" aria-hidden="true">
+                <path d="M1.22 0.54C0.91 0.87 0.72 1.38 0.72 2.04V23.96C0.72 24.62 0.91 25.13 1.22 25.46L1.31 25.54L13.59 13.26V13V12.74L1.31 0.46L1.22 0.54Z" fill="#00D2FF"/>
+                <path d="M17.68 17.35L13.59 13.26V13V12.74L17.68 8.65L17.77 8.7L22.61 11.45C23.99 12.23 23.99 13.77 22.61 14.55L17.77 17.3L17.68 17.35Z" fill="#FFCE00"/>
+                <path d="M17.77 17.3L13.59 13L1.22 25.46C1.68 25.95 2.43 26.01 3.29 25.52L17.77 17.3Z" fill="#F14336"/>
+                <path d="M17.77 8.7L3.29 0.48C2.43 -0.01 1.68 0.05 1.22 0.54L13.59 13L17.77 8.7Z" fill="#00F076"/>
+              </svg>
+              <span class="play-cta-text">
+                <span class="play-cta-kicker">Disponible en</span>
+                <span class="play-cta-label">Google Play</span>
+              </span>
+            </span>
+
+            <span class="play-cta-arrow" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Nota permanente de ayuda -->
+    <aside class="browser-tip">
+      <svg class="browser-tip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="16" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+      <p>
+        <strong>¿El enlace no abre Google Play?</strong> Algunos navegadores internos de redes sociales bloquean las redirecciones. Pulsa el menú superior (<strong>•••</strong> o <strong>⋮</strong>) y elige <strong>Abrir en el navegador</strong>.
+      </p>
+    </aside>
+
+    <footer class="colophon">
+      <span>Software independiente</span>
+      <span class="colophon-mono">pdfmelt.dev</span>
+    </footer>
+  </main>
+
+  <!-- Bloque 1: Gestión de modo claro/oscuro + barrido radial -->
+  <script>
+    (function () {
+      try {
+        var themeBtn = document.getElementById("theme-toggle");
+        var metaTheme = document.getElementById("meta-theme-color");
+        var isTransitioning = false;
+
+        function syncPressed(theme) {
+          if (themeBtn) {
+            themeBtn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+          }
+        }
+
+        function setTheme(theme, persist) {
+          document.documentElement.setAttribute("data-theme", theme);
+          syncPressed(theme);
+          if (metaTheme) {
+            metaTheme.setAttribute("content", theme === "dark" ? "#0b0f17" : "#f8fafc");
+          }
+          if (persist) {
+            try {
+              localStorage.setItem("pdfmelt_theme", theme);
+            } catch (e) {}
+          }
+        }
+
+        syncPressed(document.documentElement.getAttribute("data-theme") || "light");
+
+        if (themeBtn) {
+          themeBtn.addEventListener("click", function () {
+            if (isTransitioning) return;
+
+            var current = document.documentElement.getAttribute("data-theme") || "light";
+            var next = current === "dark" ? "light" : "dark";
+            var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (
+              typeof document.startViewTransition === "function" &&
+              typeof document.documentElement.animate === "function" &&
+              !reduceMotion
+            ) {
+              isTransitioning = true;
+              var rect = themeBtn.getBoundingClientRect();
+              var x = rect.left + rect.width / 2;
+              var y = rect.top + rect.height / 2;
+              var endRadius = Math.hypot(
+                Math.max(x, window.innerWidth - x),
+                Math.max(y, window.innerHeight - y)
+              );
+
+              var transition = document.startViewTransition(function () {
+                setTheme(next, true);
+              });
+
+              transition.ready
+                .then(function () {
+                  return document.documentElement.animate(
+                    {
+                      clipPath: [
+                        "circle(0px at " + x + "px " + y + "px)",
+                        "circle(" + endRadius + "px at " + x + "px " + y + "px)"
+                      ]
+                    },
+                    {
+                      duration: 420,
+                      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+                      pseudoElement: "::view-transition-new(root)"
+                    }
+                  ).finished;
+                })
+                .catch(function () {})
+                .finally(function () {
+                  isTransitioning = false;
+                });
+            } else {
+              setTheme(next, true);
+            }
+          });
+        }
+
+        if (window.matchMedia) {
+          var mq = window.matchMedia("(prefers-color-scheme: dark)");
+          var onSystemThemeChange = function (e) {
+            try {
+              if (!localStorage.getItem("pdfmelt_theme")) {
+                setTheme(e.matches ? "dark" : "light", false);
+              }
+            } catch (err) {}
+          };
+
+          if (typeof mq.addEventListener === "function") {
+            mq.addEventListener("change", onSystemThemeChange);
+          } else if (typeof mq.addListener === "function") {
+            mq.addListener(onSystemThemeChange);
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Bloque 2 (Aislado): Detección de Instagram Android y forzado de intent:// -->
+  <script>
+    (function () {
+      var ua = navigator.userAgent || navigator.vendor || window.opera || "";
+      var isInstagram = /Instagram/i.test(ua);
+      var isAndroid = /Android/i.test(ua);
+
+      if (isInstagram && isAndroid) {
+        var igNotice = document.getElementById("ig-notice");
+        if (igNotice) {
+          igNotice.classList.add("is-active");
+        }
+
+        var playLinks = document.querySelectorAll(".js-play-link");
+        playLinks.forEach(function (link) {
+          var packageId = link.getAttribute("data-package");
+          if (!packageId) return;
+
+          var originalPlayUrl = link.href;
+          var encodedFallback = encodeURIComponent(originalPlayUrl);
+
+          var intentUrl =
+            "intent://details?id=" + encodeURIComponent(packageId) +
+            "#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url=" +
+            encodedFallback + ";end;";
+
+          link.setAttribute("href", intentUrl);
+          link.removeAttribute("target");
+          link.removeAttribute("rel");
+
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.href = intentUrl;
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
