@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Apps — pdfmelt.dev</title>
-  <meta name="description" content="Utilidades móviles rápidas y privadas para Android. PdfMelt y CambioExpress VZ." />
+  <meta name="description" content="Utilidades móviles rápidas y privadas para Android. CambioExpress VZ y PdfMelt." />
   <meta name="theme-color" content="#f8fafc" id="meta-theme-color" />
 
   <link rel="icon" type="image/png" href="favicon.png">
@@ -72,14 +72,6 @@
       --cta-arrow-bg: rgba(255, 255, 255, 0.09);
       --cta-arrow-ink: #cbd5e1;
 
-      /* Aviso Instagram */
-      --ig-bg: #fffbeb;
-      --ig-border: #fde68a;
-      --ig-ink: #78350f;
-      --ig-strong: #451a03;
-      --ig-icon-bg: #fef3c7;
-      --ig-icon-ink: #b45309;
-
       /* Tip inferior */
       --tip-bg: #ffffff;
 
@@ -122,28 +114,32 @@
       --cta-arrow-bg: rgba(255, 255, 255, 0.07);
       --cta-arrow-ink: #cbd5e1;
 
-      /* Aviso Instagram en oscuro */
-      --ig-bg: rgba(250, 203, 1, 0.08);
-      --ig-border: rgba(250, 203, 1, 0.28);
-      --ig-ink: #fde68a;
-      --ig-strong: #fef3c7;
-      --ig-icon-bg: rgba(250, 203, 1, 0.16);
-      --ig-icon-ink: #FACB01;
-
       --tip-bg: #131924;
 
       --shadow-flat: none;
     }
 
-    /* Reglas para el barrido circular con View Transitions API */
+    /* Reglas para el barrido vertical con View Transitions API */
     ::view-transition-old(root),
     ::view-transition-new(root) {
       animation: none;
       mix-blend-mode: normal;
     }
 
+    ::view-transition-old(root) {
+      z-index: 1;
+    }
+
     ::view-transition-new(root) {
       z-index: 9999;
+    }
+
+    /* Evita que las transiciones CSS choquen con la captura de View Transitions */
+    html.is-theme-switching body,
+    html.is-theme-switching body *,
+    html.is-theme-switching body *::before,
+    html.is-theme-switching body *::after {
+      transition: none !important;
     }
 
     *, *::before, *::after {
@@ -311,42 +307,6 @@
       color: var(--ink-secondary);
       max-width: 54ch;
       line-height: 1.6;
-    }
-
-    /* --- Aviso contextual para navegador interno de Instagram --- */
-    .ig-notice {
-      display: none;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 13px 15px;
-      background: var(--ig-bg);
-      border: 1px solid var(--ig-border);
-      border-radius: 14px;
-      font-size: 12.5px;
-      line-height: 1.5;
-      color: var(--ig-ink);
-      min-width: 0;
-    }
-
-    .ig-notice.is-active {
-      display: flex;
-    }
-
-    .ig-notice-icon {
-      flex-shrink: 0;
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      background: var(--ig-icon-bg);
-      color: var(--ig-icon-ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ig-notice strong {
-      font-weight: 600;
-      color: var(--ig-strong);
     }
 
     /* --- Bento Grid (minmax(0, 1fr) evita que una tarjeta ensanche el grid) --- */
@@ -636,7 +596,7 @@
       transform: translate(1px, -1px);
     }
 
-    /* --- Nota técnica discreta --- */
+    /* --- Nota técnica discreta (y resaltado solo si falla la redirección) --- */
     .browser-tip {
       display: flex;
       align-items: flex-start;
@@ -649,18 +609,29 @@
       color: var(--ink-muted);
       line-height: 1.55;
       box-shadow: var(--shadow-flat);
-      transition: background-color 0.25s ease, border-color 0.25s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
     }
 
     .browser-tip-icon {
       flex-shrink: 0;
       margin-top: 2px;
       color: var(--ink-secondary);
+      transition: color 0.25s ease;
     }
 
     .browser-tip strong {
       color: var(--ink-primary);
       font-weight: 600;
+    }
+
+    .browser-tip.is-highlighted {
+      background: var(--yellow-surface);
+      border-color: var(--yellow-line);
+      color: var(--ink-primary);
+    }
+
+    .browser-tip.is-highlighted .browser-tip-icon {
+      color: var(--yellow-text);
     }
 
     .colophon {
@@ -730,122 +701,16 @@
       </div>
     </header>
 
-    <!-- Aviso dinámico para navegador interno de Instagram -->
-    <aside id="ig-notice" class="ig-notice" role="status">
-      <div class="ig-notice-icon" aria-hidden="true">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
-      </div>
-      <div>
-        <strong>Abierto desde Instagram:</strong> Tocando cualquier botón intentaremos abrir Google Play Store directamente. Si el navegador de Instagram lo bloquea, pulsa el menú <strong>•••</strong> arriba a la derecha y selecciona <strong>Abrir en navegador externo</strong>.
-      </div>
-    </aside>
-
-    <!-- Bento Grid de Aplicaciones -->
+    <!-- Bento Grid de Aplicaciones (CambioExpress VZ primero) -->
     <section class="bento-grid" aria-label="Catálogo de aplicaciones">
 
       <!-- =========================================================
-           TARJETA 1: PDFMELT (#0154F0)
+           TARJETA 1: CAMBIOEXPRESS VZ (#FACB01)
            ========================================================= -->
       <article class="product-card">
         <div class="card-body">
           <div class="card-head">
             <div class="app-identity">
-              
-              <div class="app-icon app-icon--blue">
-                <img src="pdfmelt-logo-512.png" alt="PDFMelt">
-              </div>
-              <div class="app-titles">
-                <span class="category-tag category-tag--blue">
-                  <span class="category-dot" aria-hidden="true"></span>
-                  Productividad
-                </span>
-                <h2 class="app-name">PdfMelt</h2>
-              </div>
-            </div>
-            <span class="platform-pill">Android</span>
-          </div>
-
-          <p class="app-summary">
-            Comprime, une y divide tus PDFs en segundos. Todo ocurre dentro de tu dispositivo, sin subir documentos a la nube ni depender de internet.
-          </p>
-
-          <div class="spec-list">
-            <span class="spec-chip spec-chip--blue">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="1" y1="1" x2="23" y2="23"/>
-                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
-                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
-                <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
-                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
-                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-                <line x1="12" y1="20" x2="12.01" y2="20"/>
-              </svg>
-              100% Offline
-            </span>
-            <span class="spec-chip spec-chip--blue">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-              Privacidad local
-            </span>
-            <span class="spec-chip spec-chip--blue">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="4 14 10 14 10 20"/>
-                <polyline points="20 10 14 10 14 4"/>
-                <line x1="14" y1="10" x2="21" y2="3"/>
-                <line x1="3" y1="21" x2="10" y2="14"/>
-              </svg>
-              Compresión real
-            </span>
-          </div>
-        </div>
-
-        <div class="card-footer">
-         
-          <a
-            href="https://play.google.com/store/apps/details?id=com.pdfmelt.app"
-            data-package="com.pdfmelt.app"
-            class="play-cta js-play-link"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Descargar PdfMelt en Google Play"
-          >
-            <span class="play-cta-left">
-              <svg width="21" height="23" viewBox="0 0 24 26" fill="none" aria-hidden="true">
-                <path d="M1.22 0.54C0.91 0.87 0.72 1.38 0.72 2.04V23.96C0.72 24.62 0.91 25.13 1.22 25.46L1.31 25.54L13.59 13.26V13V12.74L1.31 0.46L1.22 0.54Z" fill="#00D2FF"/>
-                <path d="M17.68 17.35L13.59 13.26V13V12.74L17.68 8.65L17.77 8.7L22.61 11.45C23.99 12.23 23.99 13.77 22.61 14.55L17.77 17.3L17.68 17.35Z" fill="#FFCE00"/>
-                <path d="M17.77 17.3L13.59 13L1.22 25.46C1.68 25.95 2.43 26.01 3.29 25.52L17.77 17.3Z" fill="#F14336"/>
-                <path d="M17.77 8.7L3.29 0.48C2.43 -0.01 1.68 0.05 1.22 0.54L13.59 13L17.77 8.7Z" fill="#00F076"/>
-              </svg>
-              <span class="play-cta-text">
-                <span class="play-cta-kicker">Disponible en</span>
-                <span class="play-cta-label">Google Play</span>
-              </span>
-            </span>
-
-            <span class="play-cta-arrow" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"/>
-                <polyline points="7 7 17 7 17 17"/>
-              </svg>
-            </span>
-          </a>
-        </div>
-      </article>
-
-      <!-- =========================================================
-           TARJETA 2: CAMBIOEXPRESS VZ (#FACB01)
-           ========================================================= -->
-      <article class="product-card">
-        <div class="card-body">
-          <div class="card-head">
-            <div class="app-identity">
-            
               <div class="app-icon app-icon--yellow">
                 <img src="icon-512-cambioexpress.png" alt="CambioExpressVZ">
               </div>
@@ -903,7 +768,6 @@
         </div>
 
         <div class="card-footer">
-          
           <a
             href="https://play.google.com/store/apps/details?id=com.cambioexpressvz.app"
             data-package="com.cambioexpressvz.app"
@@ -935,16 +799,105 @@
         </div>
       </article>
 
+      <!-- =========================================================
+           TARJETA 2: PDFMELT (#0154F0)
+           ========================================================= -->
+      <article class="product-card">
+        <div class="card-body">
+          <div class="card-head">
+            <div class="app-identity">
+              <div class="app-icon app-icon--blue">
+                <img src="pdfmelt-logo-512.png" alt="PDFMelt">
+              </div>
+              <div class="app-titles">
+                <span class="category-tag category-tag--blue">
+                  <span class="category-dot" aria-hidden="true"></span>
+                  Productividad
+                </span>
+                <h2 class="app-name">PdfMelt</h2>
+              </div>
+            </div>
+            <span class="platform-pill">Android</span>
+          </div>
+
+          <p class="app-summary">
+            Comprime, une y divide tus PDFs en segundos. Todo ocurre dentro de tu dispositivo, sin subir documentos a la nube ni depender de internet.
+          </p>
+
+          <div class="spec-list">
+            <span class="spec-chip spec-chip--blue">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="1" y1="1" x2="23" y2="23"/>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+                <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                <line x1="12" y1="20" x2="12.01" y2="20"/>
+              </svg>
+              100% Offline
+            </span>
+            <span class="spec-chip spec-chip--blue">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              Privacidad local
+            </span>
+            <span class="spec-chip spec-chip--blue">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="4 14 10 14 10 20"/>
+                <polyline points="20 10 14 10 14 4"/>
+                <line x1="14" y1="10" x2="21" y2="3"/>
+                <line x1="3" y1="21" x2="10" y2="14"/>
+              </svg>
+              Compresión real
+            </span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <a
+            href="https://play.google.com/store/apps/details?id=com.pdfmelt.app"
+            data-package="com.pdfmelt.app"
+            class="play-cta js-play-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Descargar PdfMelt en Google Play"
+          >
+            <span class="play-cta-left">
+              <svg width="21" height="23" viewBox="0 0 24 26" fill="none" aria-hidden="true">
+                <path d="M1.22 0.54C0.91 0.87 0.72 1.38 0.72 2.04V23.96C0.72 24.62 0.91 25.13 1.22 25.46L1.31 25.54L13.59 13.26V13V12.74L1.31 0.46L1.22 0.54Z" fill="#00D2FF"/>
+                <path d="M17.68 17.35L13.59 13.26V13V12.74L17.68 8.65L17.77 8.7L22.61 11.45C23.99 12.23 23.99 13.77 22.61 14.55L17.77 17.3L17.68 17.35Z" fill="#FFCE00"/>
+                <path d="M17.77 17.3L13.59 13L1.22 25.46C1.68 25.95 2.43 26.01 3.29 25.52L17.77 17.3Z" fill="#F14336"/>
+                <path d="M17.77 8.7L3.29 0.48C2.43 -0.01 1.68 0.05 1.22 0.54L13.59 13L17.77 8.7Z" fill="#00F076"/>
+              </svg>
+              <span class="play-cta-text">
+                <span class="play-cta-kicker">Disponible en</span>
+                <span class="play-cta-label">Google Play</span>
+              </span>
+            </span>
+
+            <span class="play-cta-arrow" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </article>
+
     </section>
 
-    <!-- Nota permanente de ayuda -->
-    <aside class="browser-tip">
+    <!-- Nota permanente de ayuda (sin robar protagonismo arriba) -->
+    <aside id="browser-tip" class="browser-tip" role="status">
       <svg class="browser-tip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="10"/>
         <line x1="12" y1="16" x2="12" y2="12"/>
         <line x1="12" y1="8" x2="12.01" y2="8"/>
       </svg>
-      <p>
+      <p id="browser-tip-text">
         <strong>¿El enlace no abre Google Play?</strong> Algunos navegadores internos de redes sociales bloquean las redirecciones. Pulsa el menú superior (<strong>•••</strong> o <strong>⋮</strong>) y elige <strong>Abrir en el navegador</strong>.
       </p>
     </aside>
@@ -955,7 +908,7 @@
     </footer>
   </main>
 
-  <!-- Bloque 1: Gestión de modo claro/oscuro + barrido radial -->
+  <!-- Bloque 1: Gestión de modo claro/oscuro + barrido vertical limpio -->
   <script>
     (function () {
       try {
@@ -998,13 +951,7 @@
               !reduceMotion
             ) {
               isTransitioning = true;
-              var rect = themeBtn.getBoundingClientRect();
-              var x = rect.left + rect.width / 2;
-              var y = rect.top + rect.height / 2;
-              var endRadius = Math.hypot(
-                Math.max(x, window.innerWidth - x),
-                Math.max(y, window.innerHeight - y)
-              );
+              document.documentElement.classList.add("is-theme-switching");
 
               var transition = document.startViewTransition(function () {
                 setTheme(next, true);
@@ -1015,12 +962,12 @@
                   return document.documentElement.animate(
                     {
                       clipPath: [
-                        "circle(0px at " + x + "px " + y + "px)",
-                        "circle(" + endRadius + "px at " + x + "px " + y + "px)"
+                        "inset(0 0 100% 0)",
+                        "inset(0 0 0 0)"
                       ]
                     },
                     {
-                      duration: 420,
+                      duration: 450,
                       easing: "cubic-bezier(0.22, 1, 0.36, 1)",
                       pseudoElement: "::view-transition-new(root)"
                     }
@@ -1028,6 +975,7 @@
                 })
                 .catch(function () {})
                 .finally(function () {
+                  document.documentElement.classList.remove("is-theme-switching");
                   isTransitioning = false;
                 });
             } else {
@@ -1056,7 +1004,7 @@
     })();
   </script>
 
-  <!-- Bloque 2 (Aislado): Detección de Instagram Android y forzado de intent:// -->
+  <!-- Bloque 2 (Aislado): Detección silenciosa de Instagram Android y forzado de intent:// -->
   <script>
     (function () {
       var ua = navigator.userAgent || navigator.vendor || window.opera || "";
@@ -1064,10 +1012,21 @@
       var isAndroid = /Android/i.test(ua);
 
       if (isInstagram && isAndroid) {
-        var igNotice = document.getElementById("ig-notice");
-        if (igNotice) {
-          igNotice.classList.add("is-active");
+        var tip = document.getElementById("browser-tip");
+        var tipText = document.getElementById("browser-tip-text");
+        var didLeave = false;
+
+        if (tipText) {
+          tipText.innerHTML =
+            '<strong>¿No abre Google Play desde Instagram?</strong> Pulsa el menú <strong>•••</strong> arriba a la derecha y selecciona <strong>Abrir en navegador externo</strong>.';
         }
+
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) didLeave = true;
+        });
+        window.addEventListener("pagehide", function () {
+          didLeave = true;
+        });
 
         var playLinks = document.querySelectorAll(".js-play-link");
         playLinks.forEach(function (link) {
@@ -1088,7 +1047,16 @@
 
           link.addEventListener("click", function (e) {
             e.preventDefault();
+            didLeave = false;
             window.location.href = intentUrl;
+
+            // Solo si después de 1.3s el usuario no salió hacia Play Store, resaltamos la ayuda inferior
+            setTimeout(function () {
+              if (!didLeave && document.visibilityState === "visible" && tip) {
+                tip.classList.add("is-highlighted");
+                tip.scrollIntoView({ behavior: "smooth", block: "nearest" });
+              }
+            }, 1300);
           });
         });
       }
