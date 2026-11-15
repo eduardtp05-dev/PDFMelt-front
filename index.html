@@ -80,48 +80,31 @@
             color: var(--brand-blue);
         }
 
-        .lang-select {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--brand-dark);
-            background-color: var(--bg-light);
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 5px 10px;
-            cursor: pointer;
-            outline: none;
-            transition: border-color 0.2s ease;
-        }
-
-        .lang-select:hover,
-        .lang-select:focus {
-            border-color: var(--brand-blue);
-        }
-
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 30px 0 55px 0;
+            padding: 28px 0 50px 0;
         }
 
         .privacy-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 7px;
             background-color: rgba(1, 84, 240, 0.08);
             color: var(--brand-blue);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 700;
-            padding: 7px 16px;
+            padding: 6px 14px;
             border-radius: 50px;
-            margin-bottom: 22px;
-            border: 1px solid rgba(1, 84, 240, 0.15);
+            margin-bottom: 20px;
+            border: 1px solid rgba(1, 84, 240, 0.14);
+            white-space: nowrap;
         }
 
         .privacy-badge svg {
-            width: 15px;
-            height: 15px;
+            width: 14px;
+            height: 14px;
             stroke: var(--brand-blue);
             fill: none;
             stroke-width: 2.4;
@@ -134,7 +117,7 @@
             font-size: 3.3rem;
             font-weight: 800;
             color: var(--brand-dark);
-            margin: 0 0 18px 0;
+            margin: 0 0 16px 0;
             line-height: 1.15;
             letter-spacing: -1.2px;
         }
@@ -144,9 +127,9 @@
         }
 
         .hero p {
-            font-size: 1.18rem;
-            max-width: 650px;
-            margin: 0 auto 30px auto;
+            font-size: 1.15rem;
+            max-width: 580px;
+            margin: 0 auto 28px auto;
         }
 
         .download-btn {
@@ -159,7 +142,7 @@
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(18, 24, 38, 0.15);
             box-sizing: border-box;
@@ -173,8 +156,8 @@
 
         .download-btn svg {
             margin-right: 12px;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             flex-shrink: 0;
         }
 
@@ -184,8 +167,8 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px 22px;
-            margin-top: 24px;
-            font-size: 0.88rem;
+            margin-top: 22px;
+            font-size: 0.86rem;
             font-weight: 600;
             color: var(--brand-dark);
         }
@@ -197,8 +180,8 @@
         }
 
         .trust-pill svg {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             stroke: var(--privacy-green);
             fill: none;
             stroke-width: 2.5;
@@ -212,7 +195,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 22px;
-            margin-top: 30px;
+            margin-top: 24px;
         }
 
         .feature-card {
@@ -275,40 +258,20 @@
         }
 
         /* Paleta de Colores por Icono */
-        .icon-blue {
-            background-color: rgba(1, 84, 240, 0.1);
-        }
-        .icon-blue svg {
-            stroke: #0154f0;
-        }
+        .icon-blue { background-color: rgba(1, 84, 240, 0.1); }
+        .icon-blue svg { stroke: #0154f0; }
 
-        .icon-purple {
-            background-color: rgba(237, 58, 58, 0.1);
-        }
-        .icon-purple svg {
-            stroke: #ed3a3a;
-        }
+        .icon-purple { background-color: rgba(237, 58, 58, 0.1); }
+        .icon-purple svg { stroke: #ed3a3a; }
 
-        .icon-green {
-            background-color: rgba(16, 185, 129, 0.1);
-        }
-        .icon-green svg {
-            stroke: #10b981;
-        }
+        .icon-green { background-color: rgba(16, 185, 129, 0.1); }
+        .icon-green svg { stroke: #10b981; }
 
-        .icon-amber {
-            background-color: rgba(245, 158, 11, 0.12);
-        }
-        .icon-amber svg {
-            stroke: #f59e0b;
-        }
+        .icon-amber { background-color: rgba(245, 158, 11, 0.12); }
+        .icon-amber svg { stroke: #f59e0b; }
 
-        .icon-dark {
-            background-color: rgba(18, 24, 38, 0.08);
-        }
-        .icon-dark svg {
-            stroke: #121826;
-        }
+        .icon-dark { background-color: rgba(18, 24, 38, 0.08); }
+        .icon-dark svg { stroke: #121826; }
 
         /* Privacy Banner */
         .privacy-banner {
@@ -409,14 +372,14 @@
             ========================================== */
         @media (max-width: 480px) {
             .container {
-                padding: 12px 10px;
+                padding: 14px 16px;
             }
 
             nav {
                 flex-direction: column;
                 gap: 10px;
-                margin-bottom: 20px;
-                padding: 10px 0 15px 0;
+                margin-bottom: 0px;
+                padding: 8px 0 14px 0;
             }
 
             .logo {
@@ -424,63 +387,61 @@
             }
 
             .nav-links {
-                gap: 10px;
+                gap: 14px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
 
             .nav-links a {
-                font-size: 0.8rem;
-            }
-
-            .lang-select {
-                font-size: 0.75rem;
-                padding: 3px 7px;
+                font-size: 0.82rem;
             }
 
             .hero {
-                padding: 12px 0 25px 0;
+                padding: 10px 0 24px 0;
             }
 
             .privacy-badge {
                 font-size: 0.72rem;
                 padding: 5px 12px;
                 margin-bottom: 14px;
+                max-width: 100%;
             }
 
             .privacy-badge svg {
-                width: 13px;
-                height: 13px;
+                width: 12px;
+                height: 12px;
             }
 
             .hero h1 {
                 font-size: 1.65rem;
                 letter-spacing: -0.5px;
+                line-height: 1.18;
                 margin-bottom: 10px;
             }
 
             .hero p {
-                font-size: 0.85rem;
-                line-height: 1.45;
+                font-size: 0.86rem;
+                line-height: 1.48;
                 margin-bottom: 20px;
             }
 
             .download-btn {
                 width: 100%;
-                padding: 10px 14px;
-                font-size: 0.85rem;
+                max-width: 310px;
+                padding: 12px 18px;
+                font-size: 0.9rem;
             }
 
             .download-btn svg {
                 width: 18px;
                 height: 18px;
-                margin-right: 8px;
+                margin-right: 9px;
             }
 
             .trust-pills {
-                gap: 8px 14px;
+                gap: 6px 14px;
                 margin-top: 16px;
-                font-size: 0.75rem;
+                font-size: 0.74rem;
             }
 
             .trust-pill svg {
@@ -492,7 +453,7 @@
             .features {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
-                margin-top: 20px;
+                margin-top: 16px;
             }
 
             .feature-card {
@@ -532,7 +493,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 16px 14px;
-                margin: 25px 0;
+                margin: 26px 0;
                 gap: 10px;
                 border-left-width: 4px;
                 border-radius: 0 10px 10px 0;
@@ -600,14 +561,6 @@
                 <a href="#features" data-i18n="nav_features">Features</a>
                 <a href="#privacy" data-i18n="nav_privacy">Privacy</a>
                 <a href="privacy.html" data-i18n="nav_policy">Privacy Policy</a>
-                <select id="lang-select" class="lang-select" aria-label="Language" translate="no">
-                    <option value="en">EN</option>
-                    <option value="es">ES</option>
-                    <option value="fr">FR</option>
-                    <option value="de">DE</option>
-                    <option value="pt">PT</option>
-                    <option value="ja">日本語</option>
-                </select>
             </div>
         </nav>
 
@@ -618,11 +571,11 @@
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
-                <span data-i18n="hero_badge">100% Offline • Zero Uploads • Free Forever</span>
+                <span data-i18n="hero_badge">100% Offline • Zero Uploads</span>
             </div>
 
             <h1 data-i18n-html="hero_title">Your Files <span>Never Leave</span> Your Device.</h1>
-            <p data-i18n="hero_sub">Compress, split, merge, and organize your PDFs right on your phone. No cloud uploads, no registration, no accounts, and zero subscriptions—just fast, private PDF tools.</p>
+            <p data-i18n="hero_sub">Compress, split, and merge PDFs right on your phone—completely offline, private, and fast.</p>
             
             <a href="https://play.google.com/store/apps/details?id=com.pdfmelt.app" class="download-btn" target="_blank">
                 <!-- SVG Play Store Icon -->
@@ -638,15 +591,15 @@
             <div class="trust-pills">
                 <span class="trust-pill">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span data-i18n="trust_1">No Cloud Uploads</span>
+                    <span data-i18n="trust_1">No Cloud</span>
                 </span>
                 <span class="trust-pill">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span data-i18n="trust_2">No Account or Sign-Up</span>
+                    <span data-i18n="trust_2">No Sign-Up</span>
                 </span>
                 <span class="trust-pill">
                     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span data-i18n="trust_3">Free &amp; No Subscriptions</span>
+                    <span data-i18n="trust_3">100% Free</span>
                 </span>
             </div>
         </div>
@@ -791,13 +744,13 @@
                     nav_features: "Features",
                     nav_privacy: "Privacy",
                     nav_policy: "Privacy Policy",
-                    hero_badge: "100% Offline • Zero Uploads • Free Forever",
+                    hero_badge: "100% Offline • Zero Uploads",
                     hero_title: "Your Files <span>Never Leave</span> Your Device.",
-                    hero_sub: "Compress, split, merge, and organize your PDFs right on your phone. No cloud uploads, no registration, no accounts, and zero subscriptions—just fast, private PDF tools.",
+                    hero_sub: "Compress, split, and merge PDFs right on your phone—completely offline, private, and fast.",
                     hero_cta: "Get it on Google Play",
-                    trust_1: "No Cloud Uploads",
-                    trust_2: "No Account or Sign-Up",
-                    trust_3: "Free & No Subscriptions",
+                    trust_1: "No Cloud",
+                    trust_2: "No Sign-Up",
+                    trust_3: "100% Free",
                     feat1_title: "Smart Compression",
                     feat1_desc: "Reduce PDF file sizes locally without losing quality or uploading sensitive documents.",
                     feat2_title: "Split & Extract",
@@ -824,13 +777,13 @@
                     nav_features: "Funciones",
                     nav_privacy: "Privacidad",
                     nav_policy: "Política de Privacidad",
-                    hero_badge: "100% Sin conexión • Cero subidas • Gratis para siempre",
+                    hero_badge: "100% Offline • Cero Subidas",
                     hero_title: "Tus Archivos <span>Nunca Salen</span> de Tu Dispositivo.",
-                    hero_sub: "Comprime, divide, une y organiza tus PDF directamente en tu teléfono. Sin subir archivos a la nube, sin registro, sin crear cuentas y sin suscripciones: herramientas PDF rápidas y privadas.",
+                    hero_sub: "Comprime, divide y une tus PDF en segundos directamente desde tu teléfono, sin internet y con privacidad total.",
                     hero_cta: "Disponible en Google Play",
-                    trust_1: "Sin subir a la nube",
-                    trust_2: "Sin cuenta ni registro",
-                    trust_3: "Gratis y sin suscripciones",
+                    trust_1: "Sin nube",
+                    trust_2: "Sin registro",
+                    trust_3: "100% Gratis",
                     feat1_title: "Compresión Inteligente",
                     feat1_desc: "Reduce el tamaño de tus PDF de forma local sin perder calidad ni subir documentos confidenciales.",
                     feat2_title: "Dividir y Extraer",
@@ -857,13 +810,13 @@
                     nav_features: "Fonctionnalités",
                     nav_privacy: "Confidentialité",
                     nav_policy: "Politique de confidentialité",
-                    hero_badge: "100 % Hors ligne • Zéro envoi • Gratuit à vie",
+                    hero_badge: "100 % Hors ligne • Zéro envoi",
                     hero_title: "Vos fichiers <span>ne quittent jamais</span> votre appareil.",
-                    hero_sub: "Compressez, divisez, fusionnez et organisez vos PDF directement sur votre téléphone. Aucun envoi dans le cloud, aucune inscription, aucun compte et zéro abonnement : des outils PDF rapides et privés.",
+                    hero_sub: "Compressez, divisez et fusionnez vos PDF directement sur votre téléphone, hors ligne et en toute confidentialité.",
                     hero_cta: "Disponible sur Google Play",
-                    trust_1: "Aucun envoi dans le cloud",
-                    trust_2: "Sans compte ni inscription",
-                    trust_3: "Gratuit et sans abonnement",
+                    trust_1: "Sans cloud",
+                    trust_2: "Sans inscription",
+                    trust_3: "100 % Gratuit",
                     feat1_title: "Compression intelligente",
                     feat1_desc: "Réduisez la taille de vos PDF localement sans perte de qualité ni transfert de documents sensibles.",
                     feat2_title: "Diviser et extraire",
@@ -890,13 +843,13 @@
                     nav_features: "Funktionen",
                     nav_privacy: "Datenschutz",
                     nav_policy: "Datenschutzerklärung",
-                    hero_badge: "100 % Offline • Keine Uploads • Dauerhaft kostenlos",
+                    hero_badge: "100 % Offline • Keine Uploads",
                     hero_title: "Ihre Dateien <span>verlassen niemals</span> Ihr Gerät.",
-                    hero_sub: "Komprimieren, teilen, verbinden und organisieren Sie Ihre PDFs direkt auf Ihrem Smartphone. Keine Cloud-Uploads, keine Registrierung, kein Konto und keine Abos – einfach schnelle, private PDF-Tools.",
+                    hero_sub: "Komprimieren, teilen und verbinden Sie PDFs direkt auf Ihrem Smartphone – komplett offline, privat und schnell.",
                     hero_cta: "Jetzt bei Google Play",
-                    trust_1: "Keine Cloud-Uploads",
-                    trust_2: "Ohne Konto oder Anmeldung",
-                    trust_3: "Kostenlos & ohne Abo",
+                    trust_1: "Keine Cloud",
+                    trust_2: "Ohne Konto",
+                    trust_3: "100 % Kostenlos",
                     feat1_title: "Smarte Komprimierung",
                     feat1_desc: "Verkleinern Sie PDF-Dateien lokal ohne Qualitätsverlust und ohne sensible Dokumente hochzuladen.",
                     feat2_title: "Teilen & Extrahieren",
@@ -923,13 +876,13 @@
                     nav_features: "Recursos",
                     nav_privacy: "Privacidade",
                     nav_policy: "Política de Privacidade",
-                    hero_badge: "100% Offline • Zero uploads • Grátis para sempre",
+                    hero_badge: "100% Offline • Zero Uploads",
                     hero_title: "Seus Arquivos <span>Nunca Saem</span> do Seu Dispositivo.",
-                    hero_sub: "Comprima, divida, junte e organize seus PDFs direto no celular. Sem uploads para a nuvem, sem cadastro, sem criar contas e sem assinaturas — apenas ferramentas de PDF rápidas e privadas.",
+                    hero_sub: "Comprima, divida e junte PDFs direto no seu celular — 100% offline, privado e rápido.",
                     hero_cta: "Disponível no Google Play",
-                    trust_1: "Sem uploads na nuvem",
-                    trust_2: "Sem conta ou cadastro",
-                    trust_3: "Grátis e sem assinaturas",
+                    trust_1: "Sem nuvem",
+                    trust_2: "Sem cadastro",
+                    trust_3: "100% Grátis",
                     feat1_title: "Compressão Inteligente",
                     feat1_desc: "Reduza o tamanho dos seus arquivos PDF localmente sem perder qualidade nem enviar documentos confidenciais.",
                     feat2_title: "Dividir e Extrair",
@@ -956,13 +909,13 @@
                     nav_features: "機能",
                     nav_privacy: "プライバシー",
                     nav_policy: "プライバシーポリシー",
-                    hero_badge: "100%オフライン • アップロード一切なし • ずっと無料",
+                    hero_badge: "100%オフライン • 送信なし",
                     hero_title: "あなたのファイルは<span>端末の外へ</span>一切出ません。",
-                    hero_sub: "スマホ上でPDFを圧縮・分割・結合・整理。クラウドへのアップロード、会員登録、アカウント作成、サブスクリプションは一切不要。高速で安全なPDFツールです。",
+                    hero_sub: "スマホ上でPDFを圧縮・分割・結合。完全オフラインで安全かつ高速に処理します。",
                     hero_cta: "Google Play で手に入れよう",
-                    trust_1: "クラウド送信なし",
-                    trust_2: "登録・アカウント不要",
-                    trust_3: "完全無料・サブスクなし",
+                    trust_1: "クラウドなし",
+                    trust_2: "登録不要",
+                    trust_3: "完全無料",
                     feat1_title: "スマート圧縮",
                     feat1_desc: "機密文書をアップロードすることなく、画質を保ったまま端末上でPDFサイズを軽量化します。",
                     feat2_title: "分割・ページ抽出",
@@ -1002,35 +955,11 @@
                     const key = el.getAttribute("data-i18n-html");
                     if (dict[key]) el.innerHTML = dict[key];
                 });
-
-                const select = document.getElementById("lang-select");
-                if (select) select.value = targetLang;
-            }
-
-            let savedLang = null;
-            try {
-                savedLang = localStorage.getItem("pdfmelt_lang");
-            } catch (e) {
-                savedLang = null;
             }
 
             const rawBrowserLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
             const browserLang = rawBrowserLang.split("-")[0];
-
-            applyLanguage(savedLang || browserLang);
-
-            const selectEl = document.getElementById("lang-select");
-            if (selectEl) {
-                selectEl.addEventListener("change", function (e) {
-                    const chosen = e.target.value;
-                    try {
-                        localStorage.setItem("pdfmelt_lang", chosen);
-                    } catch (err) {
-                        // Ignorar si el almacenamiento local está restringido
-                    }
-                    applyLanguage(chosen);
-                });
-            }
+            applyLanguage(browserLang);
         })();
     </script>
 
