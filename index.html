@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDFMelt - Compress, Split & Merge PDFs Locally</title>
+    <title>PDFMelt - Your Files Never Leave Your Device | Private Local PDF Tool</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/png" href="favicon.png">
@@ -16,6 +16,7 @@
             --bg-white: #ffffff;
             --border-light: #f1f5f9;
             --bg-light: #f8fafc;
+            --privacy-green: #10b981;
         }
 
         body {
@@ -63,6 +64,7 @@
 
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 20px;
         }
 
@@ -78,24 +80,72 @@
             color: var(--brand-blue);
         }
 
+        .lang-select {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            background-color: var(--bg-light);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 5px 10px;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .lang-select:hover,
+        .lang-select:focus {
+            border-color: var(--brand-blue);
+        }
+
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 40px 0 60px 0;
+            padding: 30px 0 55px 0;
+        }
+
+        .privacy-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(1, 84, 240, 0.08);
+            color: var(--brand-blue);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 7px 16px;
+            border-radius: 50px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(1, 84, 240, 0.15);
+        }
+
+        .privacy-badge svg {
+            width: 15px;
+            height: 15px;
+            stroke: var(--brand-blue);
+            fill: none;
+            stroke-width: 2.4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.3rem;
             font-weight: 800;
             color: var(--brand-dark);
-            margin: 0 0 20px 0;
-            line-height: 1.2;
-            letter-spacing: -1px;
+            margin: 0 0 18px 0;
+            line-height: 1.15;
+            letter-spacing: -1.2px;
+        }
+
+        .hero h1 span {
+            color: var(--brand-blue);
         }
 
         .hero p {
-            font-size: 1.25rem;
-            max-width: 600px;
+            font-size: 1.18rem;
+            max-width: 650px;
             margin: 0 auto 30px auto;
         }
 
@@ -128,12 +178,41 @@
             flex-shrink: 0;
         }
 
+        /* Trust Pills under CTA */
+        .trust-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 22px;
+            margin-top: 24px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+        }
+
+        .trust-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trust-pill svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--privacy-green);
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
         /* Features Section */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+            margin-top: 30px;
         }
 
         .feature-card {
@@ -150,7 +229,11 @@
             box-shadow: 0 12px 25px rgba(0,0,0,0.05);
         }
 
-        /* Cabecera horizontal de la tarjeta (Icono + Título) */
+        .feature-card.privacy-card {
+            background-color: #ffffff;
+            border: 1.5px solid rgba(1, 84, 240, 0.18);
+        }
+
         .feature-header {
             display: flex;
             align-items: center;
@@ -178,7 +261,7 @@
         }
 
         .feature-card h3 {
-            font-size: 1.15rem;
+            font-size: 1.12rem;
             font-weight: 700;
             color: var(--brand-dark);
             margin: 0;
@@ -192,7 +275,6 @@
         }
 
         /* Paleta de Colores por Icono */
-        /* Compress: Azul */
         .icon-blue {
             background-color: rgba(1, 84, 240, 0.1);
         }
@@ -200,7 +282,6 @@
             stroke: #0154f0;
         }
 
-        /* Split: Púrpura / Índigo */
         .icon-purple {
             background-color: rgba(237, 58, 58, 0.1);
         }
@@ -208,7 +289,6 @@
             stroke: #ed3a3a;
         }
 
-        /* Merge: Esmeralda / Verde */
         .icon-green {
             background-color: rgba(16, 185, 129, 0.1);
         }
@@ -216,12 +296,18 @@
             stroke: #10b981;
         }
 
-        /* Fast: Ámbar / Naranja */
         .icon-amber {
             background-color: rgba(245, 158, 11, 0.12);
         }
         .icon-amber svg {
             stroke: #f59e0b;
+        }
+
+        .icon-dark {
+            background-color: rgba(18, 24, 38, 0.08);
+        }
+        .icon-dark svg {
+            stroke: #121826;
         }
 
         /* Privacy Banner */
@@ -232,7 +318,7 @@
             border-radius: 0 16px 16px 0;
             margin: 50px 0;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 20px;
             box-sizing: border-box;
         }
@@ -262,13 +348,39 @@
             font-size: 1.4rem;
             font-weight: 800;
             color: var(--brand-dark);
-            margin: 0 0 6px 0;
+            margin: 0 0 8px 0;
         }
 
         .privacy-banner p {
-            margin: 0;
+            margin: 0 0 16px 0;
             color: var(--text-gray);
             font-size: 0.95rem;
+        }
+
+        .privacy-checklist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+        }
+
+        .privacy-checklist .check-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .privacy-checklist svg {
+            width: 15px;
+            height: 15px;
+            stroke: var(--brand-blue);
+            fill: none;
+            stroke-width: 2.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
         }
 
         /* Footer */
@@ -321,19 +433,35 @@
                 font-size: 0.8rem;
             }
 
+            .lang-select {
+                font-size: 0.75rem;
+                padding: 3px 7px;
+            }
+
             .hero {
-                padding: 15px 0 25px 0;
+                padding: 12px 0 25px 0;
+            }
+
+            .privacy-badge {
+                font-size: 0.72rem;
+                padding: 5px 12px;
+                margin-bottom: 14px;
+            }
+
+            .privacy-badge svg {
+                width: 13px;
+                height: 13px;
             }
 
             .hero h1 {
-                font-size: 1.6rem;
+                font-size: 1.65rem;
                 letter-spacing: -0.5px;
                 margin-bottom: 10px;
             }
 
             .hero p {
                 font-size: 0.85rem;
-                line-height: 1.4;
+                line-height: 1.45;
                 margin-bottom: 20px;
             }
 
@@ -347,6 +475,17 @@
                 width: 18px;
                 height: 18px;
                 margin-right: 8px;
+            }
+
+            .trust-pills {
+                gap: 8px 14px;
+                margin-top: 16px;
+                font-size: 0.75rem;
+            }
+
+            .trust-pill svg {
+                width: 13px;
+                height: 13px;
             }
 
             /* Grid Móvil en 2 Columnas */
@@ -380,12 +519,12 @@
             }
 
             .feature-card h3 {
-                font-size: 0.88rem;
+                font-size: 0.86rem;
                 line-height: 1.2;
             }
 
             .feature-card p {
-                font-size: 0.74rem;
+                font-size: 0.73rem;
                 line-height: 1.35;
             }
 
@@ -412,12 +551,23 @@
 
             .privacy-banner h2 {
                 font-size: 1rem;
-                margin-bottom: 4px;
+                margin-bottom: 6px;
             }
 
             .privacy-banner p {
                 font-size: 0.78rem;
                 line-height: 1.4;
+                margin-bottom: 12px;
+            }
+
+            .privacy-checklist {
+                font-size: 0.74rem;
+                gap: 6px 12px;
+            }
+
+            .privacy-checklist svg {
+                width: 13px;
+                height: 13px;
             }
 
             footer {
@@ -447,24 +597,58 @@
         <nav>
             <a translate="no" class="logo" href="#">PDF<span>Melt</span></a>
             <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#privacy">Privacy</a>
-                <a href="privacy.html">Privacy Policy</a>
+                <a href="#features" data-i18n="nav_features">Features</a>
+                <a href="#privacy" data-i18n="nav_privacy">Privacy</a>
+                <a href="privacy.html" data-i18n="nav_policy">Privacy Policy</a>
+                <select id="lang-select" class="lang-select" aria-label="Language" translate="no">
+                    <option value="en">EN</option>
+                    <option value="es">ES</option>
+                    <option value="fr">FR</option>
+                    <option value="de">DE</option>
+                    <option value="pt">PT</option>
+                    <option value="ja">日本語</option>
+                </select>
             </div>
         </nav>
 
         <!-- Hero Section -->
         <div class="hero">
-            <h1>Your Ultimate Local PDF Tool</h1>
-            <p>Compress, split, merge, and organize your PDF documents quickly, securely, and completely offline on your mobile device.</p>
-            
-            <a href="https://play.google.com/store/apps/details?id=com.tu.paquete" class="download-btn" target="_blank">
-                <!-- SVG Play Store Icon -->
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.9 2.1C18.6 1.9 18.2 1.9 17.8 2.1L3.9 9.8C3.3 10.1 3 10.7 3 11.4V12.6C3 13.3 3.3 13.9 3.9 14.2L17.8 21.9C18.2 22.1 18.6 22.1 18.9 21.9C19.3 21.7 19.5 21.3 19.5 20.9V3.1C19.5 2.7 19.3 2.3 18.9 2.1Z"/>
+            <div class="privacy-badge">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
-                Get it on Google Play
+                <span data-i18n="hero_badge">100% Offline • Zero Uploads • Free Forever</span>
+            </div>
+
+            <h1 data-i18n-html="hero_title">Your Files <span>Never Leave</span> Your Device.</h1>
+            <p data-i18n="hero_sub">Compress, split, merge, and organize your PDFs right on your phone. No cloud uploads, no registration, no accounts, and zero subscriptions—just fast, private PDF tools.</p>
+            
+            <a href="https://play.google.com/store/apps/details?id=com.pdfmelt.app" class="download-btn" target="_blank">
+                <!-- SVG Play Store Icon -->
+                <svg width="21" height="23" viewBox="0 0 24 26" fill="none" aria-hidden="true">
+                    <path d="M1.22 0.54C0.91 0.87 0.72 1.38 0.72 2.04V23.96C0.72 24.62 0.91 25.13 1.22 25.46L1.31 25.54L13.59 13.26V13V12.74L1.31 0.46L1.22 0.54Z" fill="#00D2FF"/>
+                    <path d="M17.68 17.35L13.59 13.26V13V12.74L17.68 8.65L17.77 8.7L22.61 11.45C23.99 12.23 23.99 13.77 22.61 14.55L17.77 17.3L17.68 17.35Z" fill="#FFCE00"/>
+                    <path d="M17.77 17.3L13.59 13L1.22 25.46C1.68 25.95 2.43 26.01 3.29 25.52L17.77 17.3Z" fill="#F14336"/>
+                    <path d="M17.77 8.7L3.29 0.48C2.43 -0.01 1.68 0.05 1.22 0.54L13.59 13L17.77 8.7Z" fill="#00F076"/>
+                </svg>
+                <span data-i18n="hero_cta">Get it on Google Play</span>
             </a>
+
+            <div class="trust-pills">
+                <span class="trust-pill">
+                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span data-i18n="trust_1">No Cloud Uploads</span>
+                </span>
+                <span class="trust-pill">
+                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span data-i18n="trust_2">No Account or Sign-Up</span>
+                </span>
+                <span class="trust-pill">
+                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span data-i18n="trust_3">Free &amp; No Subscriptions</span>
+                </span>
+            </div>
         </div>
 
         <!-- Features Grid -->
@@ -481,12 +665,12 @@
                             <path d="M3 21l7-7"></path>
                         </svg>
                     </div>
-                    <h3>Smart Compression</h3>
+                    <h3 data-i18n="feat1_title">Smart Compression</h3>
                 </div>
-                <p>Reduce PDF file sizes effortlessly without losing document quality.</p>
+                <p data-i18n="feat1_desc">Reduce PDF file sizes locally without losing quality or uploading sensitive documents.</p>
             </div>
 
-            <!-- Split & Extract (Púrpura) -->
+            <!-- Split & Extract (Rojo/Púrpura) -->
             <div class="feature-card">
                 <div class="feature-header">
                     <div class="feature-icon icon-purple">
@@ -498,9 +682,9 @@
                             <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
                         </svg>
                     </div>
-                    <h3>Split & Extract</h3>
+                    <h3 data-i18n="feat2_title">Split &amp; Extract</h3>
                 </div>
-                <p>Cut large documents into smaller files or extract specific pages.</p>
+                <p data-i18n="feat2_desc">Cut large documents into smaller files or extract specific pages privately on your phone.</p>
             </div>
 
             <!-- Merge Documents (Verde Esmeralda) -->
@@ -512,9 +696,9 @@
                             <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                         </svg>
                     </div>
-                    <h3>Merge Documents</h3>
+                    <h3 data-i18n="feat3_title">Merge Documents</h3>
                 </div>
-                <p>Combine multiple PDF files into a single, organized document.</p>
+                <p data-i18n="feat3_desc">Combine multiple PDF files into one organized document completely offline.</p>
             </div>
 
             <!-- Blazing Fast (Ámbar / Naranja) -->
@@ -525,9 +709,37 @@
                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                         </svg>
                     </div>
-                    <h3>Blazing Fast</h3>
+                    <h3 data-i18n="feat4_title">Blazing Fast</h3>
                 </div>
-                <p>Optimized for mobile to process documents in seconds offline.</p>
+                <p data-i18n="feat4_desc">Zero upload wait times. Optimized for mobile to process documents in seconds offline.</p>
+            </div>
+
+            <!-- Never Uploaded (Azul - Privacidad) -->
+            <div class="feature-card privacy-card">
+                <div class="feature-header">
+                    <div class="feature-icon icon-blue">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="feat5_title">Never Uploaded</h3>
+                </div>
+                <p data-i18n="feat5_desc">Your PDFs stay strictly on your device. Nothing is ever sent to any cloud or server.</p>
+            </div>
+
+            <!-- No Account, Free Forever (Oscuro - Privacidad) -->
+            <div class="feature-card privacy-card">
+                <div class="feature-header">
+                    <div class="feature-icon icon-dark">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                            <line x1="2" y1="2" x2="22" y2="22"></line>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="feat6_title">No Sign-Up. Free.</h3>
+                </div>
+                <p data-i18n="feat6_desc">No registration, no account creation, and no subscriptions. Open the app and get to work.</p>
             </div>
 
         </div>
@@ -540,23 +752,287 @@
                 </svg>
             </div>
             <div>
-                <h2>100% Local & Private</h2>
-                <p>Your documents are your business. PDFMelt operates completely offline. Your files are processed locally on your device's memory and are <strong>never</strong> uploaded to any cloud or external servers.</p>
+                <h2 data-i18n="banner_title">Private by Design: What Happens on Your Device, Stays on Your Device</h2>
+                <p data-i18n-html="banner_desc">Your documents are your business. PDFMelt works 100% offline inside your device's memory. Your files are <strong>never</strong> uploaded anywhere, and we will <strong>never</strong> ask you to register, create an account, or pay for a subscription.</p>
+                <div class="privacy-checklist">
+                    <span class="check-item">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span data-i18n="check_1">Files never leave your phone</span>
+                    </span>
+                    <span class="check-item">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span data-i18n="check_2">No registration or accounts</span>
+                    </span>
+                    <span class="check-item">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span data-i18n="check_3">100% free, zero subscriptions</span>
+                    </span>
+                </div>
             </div>
         </div>
 
         <!-- Footer -->
         <footer>
             <div>
-                <a href="mailto:support@pdfmelt.dev">Contact Support</a>
-                
-                <a href="privacy.html">Privacy Policy</a>
+                <a href="mailto:support@pdfmelt.dev" data-i18n="footer_support">Contact Support</a>
+                <a href="privacy.html" data-i18n="footer_policy">Privacy Policy</a>
             </div>
             <br>
-            © 2026 PDF<span>Melt.</span> All rights reserved.
+            © 2026 <span translate="no">PDF<span>Melt.</span></span> <span data-i18n="footer_rights">All rights reserved.</span>
         </footer>
 
     </div>
+
+    <script>
+        (function () {
+            const translations = {
+                en: {
+                    page_title: "PDFMelt - Your Files Never Leave Your Device | Private Local PDF Tool",
+                    nav_features: "Features",
+                    nav_privacy: "Privacy",
+                    nav_policy: "Privacy Policy",
+                    hero_badge: "100% Offline • Zero Uploads • Free Forever",
+                    hero_title: "Your Files <span>Never Leave</span> Your Device.",
+                    hero_sub: "Compress, split, merge, and organize your PDFs right on your phone. No cloud uploads, no registration, no accounts, and zero subscriptions—just fast, private PDF tools.",
+                    hero_cta: "Get it on Google Play",
+                    trust_1: "No Cloud Uploads",
+                    trust_2: "No Account or Sign-Up",
+                    trust_3: "Free & No Subscriptions",
+                    feat1_title: "Smart Compression",
+                    feat1_desc: "Reduce PDF file sizes locally without losing quality or uploading sensitive documents.",
+                    feat2_title: "Split & Extract",
+                    feat2_desc: "Cut large documents into smaller files or extract specific pages privately on your phone.",
+                    feat3_title: "Merge Documents",
+                    feat3_desc: "Combine multiple PDF files into one organized document completely offline.",
+                    feat4_title: "Blazing Fast",
+                    feat4_desc: "Zero upload wait times. Optimized for mobile to process documents in seconds offline.",
+                    feat5_title: "Never Uploaded",
+                    feat5_desc: "Your PDFs stay strictly on your device. Nothing is ever sent to any cloud or server.",
+                    feat6_title: "No Sign-Up. Free.",
+                    feat6_desc: "No registration, no account creation, and no subscriptions. Open the app and get to work.",
+                    banner_title: "Private by Design: What Happens on Your Device, Stays on Your Device",
+                    banner_desc: "Your documents are your business. PDFMelt works 100% offline inside your device's memory. Your files are <strong>never</strong> uploaded anywhere, and we will <strong>never</strong> ask you to register, create an account, or pay for a subscription.",
+                    check_1: "Files never leave your phone",
+                    check_2: "No registration or accounts",
+                    check_3: "100% free, zero subscriptions",
+                    footer_support: "Contact Support",
+                    footer_policy: "Privacy Policy",
+                    footer_rights: "All rights reserved."
+                },
+                es: {
+                    page_title: "PDFMelt - Tus archivos nunca salen de tu dispositivo | Herramienta PDF privada",
+                    nav_features: "Funciones",
+                    nav_privacy: "Privacidad",
+                    nav_policy: "Política de Privacidad",
+                    hero_badge: "100% Sin conexión • Cero subidas • Gratis para siempre",
+                    hero_title: "Tus Archivos <span>Nunca Salen</span> de Tu Dispositivo.",
+                    hero_sub: "Comprime, divide, une y organiza tus PDF directamente en tu teléfono. Sin subir archivos a la nube, sin registro, sin crear cuentas y sin suscripciones: herramientas PDF rápidas y privadas.",
+                    hero_cta: "Disponible en Google Play",
+                    trust_1: "Sin subir a la nube",
+                    trust_2: "Sin cuenta ni registro",
+                    trust_3: "Gratis y sin suscripciones",
+                    feat1_title: "Compresión Inteligente",
+                    feat1_desc: "Reduce el tamaño de tus PDF de forma local sin perder calidad ni subir documentos confidenciales.",
+                    feat2_title: "Dividir y Extraer",
+                    feat2_desc: "Corta documentos grandes en archivos más pequeños o extrae páginas específicas en privado desde tu teléfono.",
+                    feat3_title: "Unir Documentos",
+                    feat3_desc: "Combina varios archivos PDF en un solo documento organizado y totalmente sin conexión.",
+                    feat4_title: "Ultrarrápido",
+                    feat4_desc: "Cero tiempos de espera al subir. Optimizado para procesar documentos en segundos desde tu móvil sin internet.",
+                    feat5_title: "Nunca se Suben",
+                    feat5_desc: "Tus PDF permanecen estrictamente en tu dispositivo. Nada se envía jamás a ninguna nube o servidor.",
+                    feat6_title: "Sin Registro. Gratis.",
+                    feat6_desc: "Sin registros, sin crear cuentas y sin suscripciones. Abre la aplicación y ponte a trabajar.",
+                    banner_title: "Privacidad por Diseño: Lo que ocurre en tu dispositivo, se queda en tu dispositivo",
+                    banner_desc: "Tus documentos son asunto tuyo. PDFMelt funciona 100% sin conexión dentro de la memoria de tu dispositivo. Tus archivos <strong>nunca</strong> se suben a ningún lado y <strong>jamás</strong> te pediremos registrarte, crear una cuenta ni pagar una suscripción.",
+                    check_1: "Los archivos nunca salen de tu teléfono",
+                    check_2: "Sin registro ni cuentas",
+                    check_3: "100% gratis, cero suscripciones",
+                    footer_support: "Contactar Soporte",
+                    footer_policy: "Política de Privacidad",
+                    footer_rights: "Todos los derechos reservados."
+                },
+                fr: {
+                    page_title: "PDFMelt - Vos fichiers ne quittent jamais votre appareil | Outil PDF local et privé",
+                    nav_features: "Fonctionnalités",
+                    nav_privacy: "Confidentialité",
+                    nav_policy: "Politique de confidentialité",
+                    hero_badge: "100 % Hors ligne • Zéro envoi • Gratuit à vie",
+                    hero_title: "Vos fichiers <span>ne quittent jamais</span> votre appareil.",
+                    hero_sub: "Compressez, divisez, fusionnez et organisez vos PDF directement sur votre téléphone. Aucun envoi dans le cloud, aucune inscription, aucun compte et zéro abonnement : des outils PDF rapides et privés.",
+                    hero_cta: "Disponible sur Google Play",
+                    trust_1: "Aucun envoi dans le cloud",
+                    trust_2: "Sans compte ni inscription",
+                    trust_3: "Gratuit et sans abonnement",
+                    feat1_title: "Compression intelligente",
+                    feat1_desc: "Réduisez la taille de vos PDF localement sans perte de qualité ni transfert de documents sensibles.",
+                    feat2_title: "Diviser et extraire",
+                    feat2_desc: "Découpez de grands documents en fichiers plus petits ou extrayez des pages précises en toute confidentialité sur votre téléphone.",
+                    feat3_title: "Fusionner des documents",
+                    feat3_desc: "Combinez plusieurs fichiers PDF en un seul document organisé, entièrement hors ligne.",
+                    feat4_title: "Ultra rapide",
+                    feat4_desc: "Aucun temps d'attente d'envoi. Optimisé pour mobile afin de traiter vos documents en quelques secondes hors ligne.",
+                    feat5_title: "Jamais envoyés",
+                    feat5_desc: "Vos PDF restent strictement sur votre appareil. Rien n'est jamais envoyé vers un cloud ou un serveur.",
+                    feat6_title: "Sans inscription. Gratuit.",
+                    feat6_desc: "Pas d'inscription, pas de création de compte et aucun abonnement. Ouvrez l'application et travaillez immédiatement.",
+                    banner_title: "Confidentiel par conception : ce qui se passe sur votre appareil reste sur votre appareil",
+                    banner_desc: "Vos documents ne regardent que vous. PDFMelt fonctionne 100 % hors ligne dans la mémoire de votre appareil. Vos fichiers ne sont <strong>jamais</strong> envoyés nulle part, et nous ne vous demanderons <strong>jamais</strong> de vous inscrire, de créer un compte ou de payer un abonnement.",
+                    check_1: "Les fichiers ne quittent jamais votre téléphone",
+                    check_2: "Aucune inscription ni compte",
+                    check_3: "100 % gratuit, zéro abonnement",
+                    footer_support: "Contacter le support",
+                    footer_policy: "Politique de confidentialité",
+                    footer_rights: "Tous droits réservés."
+                },
+                de: {
+                    page_title: "PDFMelt - Ihre Dateien verlassen niemals Ihr Gerät | Privates lokales PDF-Tool",
+                    nav_features: "Funktionen",
+                    nav_privacy: "Datenschutz",
+                    nav_policy: "Datenschutzerklärung",
+                    hero_badge: "100 % Offline • Keine Uploads • Dauerhaft kostenlos",
+                    hero_title: "Ihre Dateien <span>verlassen niemals</span> Ihr Gerät.",
+                    hero_sub: "Komprimieren, teilen, verbinden und organisieren Sie Ihre PDFs direkt auf Ihrem Smartphone. Keine Cloud-Uploads, keine Registrierung, kein Konto und keine Abos – einfach schnelle, private PDF-Tools.",
+                    hero_cta: "Jetzt bei Google Play",
+                    trust_1: "Keine Cloud-Uploads",
+                    trust_2: "Ohne Konto oder Anmeldung",
+                    trust_3: "Kostenlos & ohne Abo",
+                    feat1_title: "Smarte Komprimierung",
+                    feat1_desc: "Verkleinern Sie PDF-Dateien lokal ohne Qualitätsverlust und ohne sensible Dokumente hochzuladen.",
+                    feat2_title: "Teilen & Extrahieren",
+                    feat2_desc: "Teilen Sie große Dokumente in kleinere Dateien oder extrahieren Sie einzelne Seiten privat auf Ihrem Smartphone.",
+                    feat3_title: "Dokumente zusammenfügen",
+                    feat3_desc: "Kombinieren Sie mehrere PDF-Dateien zu einem übersichtlichen Dokument – komplett offline.",
+                    feat4_title: "Blitzschnell",
+                    feat4_desc: "Keine Upload-Wartezeiten. Für Mobilgeräte optimiert, um Dokumente offline in Sekunden zu verarbeiten.",
+                    feat5_title: "Niemals hochgeladen",
+                    feat5_desc: "Ihre PDFs bleiben strikt auf Ihrem Gerät. Nichts wird jemals an eine Cloud oder einen Server gesendet.",
+                    feat6_title: "Ohne Anmeldung. Kostenlos.",
+                    feat6_desc: "Keine Registrierung, keine Kontoerstellung und keine Abonnements. App öffnen und sofort loslegen.",
+                    banner_title: "Privacy by Design: Was auf Ihrem Gerät passiert, bleibt auf Ihrem Gerät",
+                    banner_desc: "Ihre Dokumente sind Ihre Privatsache. PDFMelt arbeitet 100 % offline im Speicher Ihres Geräts. Ihre Dateien werden <strong>niemals</strong> irgendwo hochgeladen, und wir werden Sie <strong>nie</strong> auffordern, sich zu registrieren, ein Konto zu erstellen oder ein Abo abzuschließen.",
+                    check_1: "Dateien verlassen niemals Ihr Smartphone",
+                    check_2: "Keine Registrierung, kein Konto",
+                    check_3: "100 % kostenlos, null Abos",
+                    footer_support: "Support kontaktieren",
+                    footer_policy: "Datenschutzerklärung",
+                    footer_rights: "Alle Rechte vorbehalten."
+                },
+                pt: {
+                    page_title: "PDFMelt - Seus arquivos nunca saem do seu dispositivo | Ferramenta PDF privada",
+                    nav_features: "Recursos",
+                    nav_privacy: "Privacidade",
+                    nav_policy: "Política de Privacidade",
+                    hero_badge: "100% Offline • Zero uploads • Grátis para sempre",
+                    hero_title: "Seus Arquivos <span>Nunca Saem</span> do Seu Dispositivo.",
+                    hero_sub: "Comprima, divida, junte e organize seus PDFs direto no celular. Sem uploads para a nuvem, sem cadastro, sem criar contas e sem assinaturas — apenas ferramentas de PDF rápidas e privadas.",
+                    hero_cta: "Disponível no Google Play",
+                    trust_1: "Sem uploads na nuvem",
+                    trust_2: "Sem conta ou cadastro",
+                    trust_3: "Grátis e sem assinaturas",
+                    feat1_title: "Compressão Inteligente",
+                    feat1_desc: "Reduza o tamanho dos seus arquivos PDF localmente sem perder qualidade nem enviar documentos confidenciais.",
+                    feat2_title: "Dividir e Extrair",
+                    feat2_desc: "Corte documentos grandes em arquivos menores ou extraia páginas específicas com total privacidade no celular.",
+                    feat3_title: "Juntar Documentos",
+                    feat3_desc: "Combine vários arquivos PDF em um único documento organizado, totalmente offline.",
+                    feat4_title: "Extremamente Rápido",
+                    feat4_desc: "Zero tempo de espera para upload. Otimizado para celular para processar documentos em segundos offline.",
+                    feat5_title: "Nunca Enviado",
+                    feat5_desc: "Seus PDFs ficam estritamente no seu dispositivo. Nada é enviado para nenhuma nuvem ou servidor.",
+                    feat6_title: "Sem Cadastro. Grátis.",
+                    feat6_desc: "Sem registro, sem criação de conta e sem assinaturas. Abra o aplicativo e comece a usar.",
+                    banner_title: "Privacidade desde a base: o que acontece no seu dispositivo fica no seu dispositivo",
+                    banner_desc: "Seus documentos dizem respeito apenas a você. O PDFMelt funciona 100% offline na memória do seu dispositivo. Seus arquivos <strong>nunca</strong> são enviados para lugar nenhum, e nós <strong>jamais</strong> pediremos cadastro, criação de conta ou pagamento de assinatura.",
+                    check_1: "Os arquivos nunca saem do seu celular",
+                    check_2: "Sem cadastro nem contas",
+                    check_3: "100% grátis, zero assinaturas",
+                    footer_support: "Contatar Suporte",
+                    footer_policy: "Política de Privacidade",
+                    footer_rights: "Todos os direitos reservados."
+                },
+                ja: {
+                    page_title: "PDFMelt - ファイルは端末から一切外に出ません | プライベートPDFツール",
+                    nav_features: "機能",
+                    nav_privacy: "プライバシー",
+                    nav_policy: "プライバシーポリシー",
+                    hero_badge: "100%オフライン • アップロード一切なし • ずっと無料",
+                    hero_title: "あなたのファイルは<span>端末の外へ</span>一切出ません。",
+                    hero_sub: "スマホ上でPDFを圧縮・分割・結合・整理。クラウドへのアップロード、会員登録、アカウント作成、サブスクリプションは一切不要。高速で安全なPDFツールです。",
+                    hero_cta: "Google Play で手に入れよう",
+                    trust_1: "クラウド送信なし",
+                    trust_2: "登録・アカウント不要",
+                    trust_3: "完全無料・サブスクなし",
+                    feat1_title: "スマート圧縮",
+                    feat1_desc: "機密文書をアップロードすることなく、画質を保ったまま端末上でPDFサイズを軽量化します。",
+                    feat2_title: "分割・ページ抽出",
+                    feat2_desc: "大きなPDFを分割したり、必要なページだけをスマホ上で安全に抜き出したりできます。",
+                    feat3_title: "PDFの結合",
+                    feat3_desc: "複数のPDFファイルを完全オフラインで1つの整理されたドキュメントにまとめます。",
+                    feat4_title: "圧倒的な処理速度",
+                    feat4_desc: "アップロードの待ち時間ゼロ。モバイルに最適化されており、オフラインで数秒で処理します。",
+                    feat5_title: "アップロード一切なし",
+                    feat5_desc: "PDFは厳密にあなたの端末内にとどまります。クラウドや外部サーバーへ送信されることはありません。",
+                    feat6_title: "登録不要・完全無料",
+                    feat6_desc: "会員登録、アカウント作成、月額課金は一切なし。アプリを開いてすぐに使えます。",
+                    banner_title: "プライバシー最優先設計：端末内の処理はすべて端末内で完結",
+                    banner_desc: "あなたの文書はあなただけのものです。PDFMeltは端末のメモリ内で100%オフライン動作します。ファイルが外部へアップロードされることは<strong>決してなく</strong>、登録やアカウント作成、サブスクリプションの支払いを求めることも<strong>一切ありません</strong>。",
+                    check_1: "ファイルはスマホから一切出ません",
+                    check_2: "登録・アカウント作成不要",
+                    check_3: "完全無料・サブスクなし",
+                    footer_support: "サポートへのお問い合わせ",
+                    footer_policy: "プライバシーポリシー",
+                    footer_rights: "All rights reserved."
+                }
+            };
+
+            function applyLanguage(lang) {
+                const targetLang = translations[lang] ? lang : "en";
+                const dict = translations[targetLang];
+
+                document.documentElement.lang = targetLang;
+                document.title = dict.page_title;
+
+                document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                    const key = el.getAttribute("data-i18n");
+                    if (dict[key]) el.textContent = dict[key];
+                });
+
+                document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+                    const key = el.getAttribute("data-i18n-html");
+                    if (dict[key]) el.innerHTML = dict[key];
+                });
+
+                const select = document.getElementById("lang-select");
+                if (select) select.value = targetLang;
+            }
+
+            let savedLang = null;
+            try {
+                savedLang = localStorage.getItem("pdfmelt_lang");
+            } catch (e) {
+                savedLang = null;
+            }
+
+            const rawBrowserLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+            const browserLang = rawBrowserLang.split("-")[0];
+
+            applyLanguage(savedLang || browserLang);
+
+            const selectEl = document.getElementById("lang-select");
+            if (selectEl) {
+                selectEl.addEventListener("change", function (e) {
+                    const chosen = e.target.value;
+                    try {
+                        localStorage.setItem("pdfmelt_lang", chosen);
+                    } catch (err) {
+                        // Ignorar si el almacenamiento local está restringido
+                    }
+                    applyLanguage(chosen);
+                });
+            }
+        })();
+    </script>
 
 </body>
 </html>
